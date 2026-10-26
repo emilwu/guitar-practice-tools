@@ -1,4 +1,4 @@
-const CACHE = "guitar-tools-v5";
+const CACHE = "guitar-tools-v6";
 const SAMPLE_GUITARS = ["greco", "yamaha"];
 const SAMPLE_FRETS = [0, 4, 8, 12];
 const ASSETS = [
@@ -25,8 +25,12 @@ const ASSETS = [
   "./chord/state.js",
   "./chord/voicings.js",
   "./chord/voiceleading.js",
+  "./chord/triads.js",
   "./metronome/",
   "./metronome/index.html",
+  "./metronome/metronome.css",
+  "./metronome/app.js",
+  "./metronome/timing.js",
   "./log/",
   "./log/index.html",
   "./fretboard/",

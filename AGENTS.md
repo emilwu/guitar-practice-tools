@@ -4,7 +4,7 @@
 
 ## 約定
 
-- 每個工具一個子資料夾，從 repo 根目錄算起。現在有 `chord/`（已上線）、`metronome/`、`log/`、`fretboard/`（骨架，即將推出）。之後的工具同樣各開一個新資料夾。
+- 每個工具一個子資料夾，從 repo 根目錄算起。現在有 `chord/`、`metronome/`（已上線）、`log/`、`fretboard/`（骨架，即將推出）。之後的工具同樣各開一個新資料夾。
 - 共用程式只放 `shared/`，每個工具用相對路徑 import，不要複製一份：
   - `shared/diagram.js`：指板與和弦圖 SVG
   - `shared/theory.js`：包在 `vendor/tonal` 上的理論
@@ -18,6 +18,32 @@
 - 維持純靜態 HTML、CSS、原生 JS ES modules。不要後端，也不要為了開啟頁面而建置。
 - 介面文字用繁體中文（zh-Hant-TW）。Dorian、shell voicing、guide tone 這類音樂詞可以留英文。
 - 狀態放 `localStorage` 和網址 hash。第一次載入後要能離線，也要能在 iPhone Safari 使用。
+
+## 節拍器網址 hash
+
+學習地圖用這個 hash 直接打開一個預設。出現下面任一參數時，以 hash 為準，沒寫的用預設，不跟這台裝置的 `localStorage` 混在一起。完全沒有 hash 時才讀 `guitar-tools.metronome.v1`。
+
+參數接在 `#` 後面，格式同 query string。斜線可以寫 `/` 或 `%2F`。實作在 `metronome/timing.js` 的 `parseHash` / `serializeHash`。
+
+| 參數 | 值 | 預設 |
+| --- | --- | --- |
+| `bpm` | 30–300 的整數。一拍是拍號的分母：4/4 是四分音符，6/8、7/8、12/8 是八分音符 | `100` |
+| `meter` | `2/4` `3/4` `4/4` `5/4` `6/8` `7/8` `12/8` | `4/4` |
+| `subdivision` | `quarter` `eighth` `triplet` `sixteenth`，把每一拍分成 1、2、3、4 聲 | `quarter` |
+| `swing` | 50–75 的整數。只有 `subdivision=eighth` 聽得到。50 是平直八分，67 約三連音 2:1，75 是 3:1。數字是第一個八分音符佔這一拍的百分比 | `50` |
+| `accents` | 每拍一個字，長度必須等於拍號分子。`a` 重音、`n` 普通、`m` 靜音。靜音的那一拍，細分也不響。長度不合就回到該拍號的預設 | `4/4` 是 `annn`。6/8、12/8 每三拍的第一拍是 `a` |
+| `mute` | `出聲/靜音` 的小節數，例如 `2/2`。`0` 或 `off` 代表關閉 | `2/0` |
+| `ladder` | `起始-目標-每段增加-每段小節`，例如 `80-120-5-4`。目標比較小就往下走。`off` 代表關閉 | `off` |
+
+`volume`（0–100，預設 80）和 `flash`（`1` 開拍點閃光）可以省略。階梯關著但數字被改過時，頁面會寫 `ladder=off:90-130-4-2` 這種形式；學習地圖不用產生它，寫 `off` 或省略即可。
+
+60 BPM、八分音符、只在第 2 與第 4 拍點擊：
+
+```
+metronome/#bpm=60&meter=4/4&subdivision=eighth&swing=50&accents=mama
+```
+
+`accents=mama` 是第 1、3 拍靜音，第 2、4 拍重音。頁面載入後可能補上 `mute=2/0&ladder=off`，聽到的拍相同。
 
 ## 吉他音色
 

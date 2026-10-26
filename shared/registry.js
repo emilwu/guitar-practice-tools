@@ -14,7 +14,7 @@ export const TOOLS = [
     href: "metronome/",
     name: "節拍器",
     summary: "swing、細分、靜音小節、BPM 階梯。給 Funk 的 16 分音符和 Jazz 的 2、4 拍。",
-    status: "soon",
+    status: "live",
   },
   {
     id: "T3",

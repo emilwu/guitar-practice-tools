@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#1a1612">
-  <title>節拍器｜即將推出</title>
+  <title>節拍器｜吉他練習工具</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../shared/styles/base.css">
+  <link rel="stylesheet" href="./metronome.css">
 </head>
-<body data-tool="metronome">
+<body>
   <header class="site-header">
     <a class="brand" href="../">
       <span class="seal" aria-hidden="true">練</span>
@@ -16,14 +17,103 @@
     </a>
     <a href="../">回練習台</a>
   </header>
-  <main class="wrap">
-    <section class="paper" style="padding: 28px 22px;">
-      <p class="styles">即將推出</p>
-      <h1 id="soon-title">節拍器</h1>
-      <p id="soon-body" class="lede">這個工具即將推出，完成後會留在這個資料夾。</p>
-      <p><a class="pill" href="../">回練習台</a></p>
+  <main class="wrap metro">
+    <p class="lede metro-lede">戴耳機練穩定的拍。給 Jazz、Neo Soul、Funk、Fusion。</p>
+    <section class="stand" id="stand" aria-hidden="true">
+      <p class="stand-kicker" id="stand-kicker">準備</p>
+      <p class="beat-num" id="beat-num">1</p>
+      <div class="sub-pips" id="sub-pips"></div>
+      <p class="stand-bpm"><span id="live-bpm">100</span> <small>BPM</small></p>
+      <p class="stand-meta" id="stand-meta">4/4 · 四分</p>
     </section>
+    <p id="transport-status" class="visually-hidden" aria-live="polite">準備</p>
+
+    <div class="metro-grid">
+      <section class="panel span-2">
+        <div class="transport-buttons">
+          <button type="button" class="start" id="start">開始</button>
+          <button type="button" class="tap" id="tap">點拍</button>
+        </div>
+        <p class="hint">空白鍵開始或停止。↑↓ 調整 1 BPM，←→ 調整 5 BPM。方向鍵調的是現在聽到的速度。</p>
+      </section>
+
+      <section class="panel">
+        <h2>速度</h2>
+        <div class="bpm-row">
+          <button type="button" data-bump="-5" aria-label="減 5 BPM">−5</button>
+          <button type="button" data-bump="-1" aria-label="減 1 BPM">−1</button>
+          <input id="bpm-num" class="bpm-num" type="number" min="30" max="300" step="1" inputmode="numeric" autocomplete="off" aria-label="BPM">
+          <button type="button" data-bump="1" aria-label="加 1 BPM">+1</button>
+          <button type="button" data-bump="5" aria-label="加 5 BPM">+5</button>
+        </div>
+        <input id="bpm-range" type="range" min="30" max="300" step="1" aria-label="BPM 滑桿">
+        <p class="hint" id="bpm-hint">30–300。4/4 數的是四分音符，6/8、7/8、12/8 數的是八分音符。</p>
+      </section>
+
+      <section class="panel">
+        <h2>拍號</h2>
+        <div class="chips" id="meters" role="group" aria-label="拍號"></div>
+        <p class="hint" id="meter-hint"></p>
+      </section>
+
+      <section class="panel">
+        <h2>細分與 Swing</h2>
+        <div class="chips" id="subs" role="group" aria-label="細分"></div>
+        <p class="hint" id="sub-hint"></p>
+        <label class="slider-label" for="swing">Swing <span id="swing-readout">50%</span></label>
+        <input id="swing" type="range" min="50" max="75" step="1" aria-label="Swing 百分比">
+        <div class="chips">
+          <button type="button" class="chip" id="swing-straight">平直 50%</button>
+          <button type="button" class="chip" id="swing-triplet">三連音 2:1</button>
+          <button type="button" class="chip" id="swing-heavy">重 Swing 75%</button>
+        </div>
+        <p class="hint" id="swing-hint"></p>
+      </section>
+
+      <section class="panel">
+        <h2>重音</h2>
+        <div class="beat-dots" id="beat-dots" role="group" aria-label="每拍重音"></div>
+        <div class="chips">
+          <button type="button" class="chip" id="jazz">Jazz：只點 2、4</button>
+          <button type="button" class="chip" id="accent-reset">回到預設</button>
+        </div>
+        <p class="hint">點圓點循環：重音 → 普通 → 靜音。靜音的那一拍，細分也不響。</p>
+      </section>
+
+      <section class="panel">
+        <h2>靜音小節</h2>
+        <p class="hint">出聲幾小節、關掉幾小節，用來練內在拍。靜音時大數字改成「靜」，不跟著每一拍跳。</p>
+        <div class="pair">
+          <label>出聲小節 <input id="play-bars" type="number" min="1" max="32" step="1" inputmode="numeric" autocomplete="off"></label>
+          <label>靜音小節 <input id="mute-bars" type="number" min="0" max="32" step="1" inputmode="numeric" autocomplete="off"></label>
+        </div>
+        <div class="chips" id="gap-presets"></div>
+      </section>
+
+      <section class="panel">
+        <h2>BPM 階梯</h2>
+        <label class="check"><input type="checkbox" id="ladder-on"> 從起始速度走到目標</label>
+        <div class="grid-4">
+          <label>起始 <input id="lstart" type="number" min="30" max="300" step="1" inputmode="numeric" autocomplete="off"></label>
+          <label>目標 <input id="ltarget" type="number" min="30" max="300" step="1" inputmode="numeric" autocomplete="off"></label>
+          <label>每段增加 <input id="lstep" type="number" min="1" max="270" step="1" inputmode="numeric" autocomplete="off"></label>
+          <label>每段小節 <input id="lbars" type="number" min="1" max="64" step="1" inputmode="numeric" autocomplete="off"></label>
+        </div>
+        <p class="progress" id="ladder-progress"></p>
+      </section>
+
+      <section class="panel span-2">
+        <h2>聲音</h2>
+        <label class="slider-label" for="volume">音量 <span id="vol-readout">80%</span></label>
+        <input id="volume" type="range" min="0" max="100" step="1" aria-label="音量">
+        <label class="check"><input type="checkbox" id="flash"> 拍點閃光（放在譜架上比較好抓）</label>
+        <p class="hint">重音較低、較亮，正拍是中間的敲擊，細分又短又輕。戴耳機時可先把音量調小。</p>
+        <button type="button" class="chip" id="copy-link">複製這個設定的連結</button>
+        <p class="hint" id="copy-status">網址帶著 BPM、拍號、細分、Swing、重音、靜音小節和階梯。60 BPM、八分、只點 2 與 4：<span class="hash-example">#bpm=60&amp;meter=4/4&amp;subdivision=eighth&amp;swing=50&amp;accents=mama</span></p>
+      </section>
+    </div>
   </main>
-  <script type="module" src="../shared/soon.js"></script>
+  <footer class="site-footer">空白鍵開始或停止，方向鍵調目前聽到的 BPM。點擊是合成的。分頁在背景時照音訊時鐘排程；若瀏覽器把頁面暫停，回到前景會重新對齊，不會補上一長串。</footer>
+  <script type="module" src="./app.js"></script>
 </body>
 </html>
