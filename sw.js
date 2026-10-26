@@ -1,4 +1,4 @@
-const CACHE = "guitar-tools-v7";
+const CACHE = "guitar-tools-v8";
 const SAMPLE_GUITARS = ["greco", "yamaha"];
 const SAMPLE_FRETS = [0, 4, 8, 12];
 const ASSETS = [
@@ -10,6 +10,8 @@ const ASSETS = [
   "./shared/soon.js",
   "./shared/registry.js",
   "./shared/pwa.js",
+  "./shared/embed.js",
+  "./shared/embed-boot.js",
   "./shared/pitch.js",
   "./shared/theory.js",
   "./shared/boxes.js",
@@ -34,6 +36,9 @@ const ASSETS = [
   "./metronome/timing.js",
   "./log/",
   "./log/index.html",
+  "./log/log.css",
+  "./log/log.js",
+  "./log/app.js",
   "./fretboard/",
   "./fretboard/index.html",
   "./fretboard/fretboard.css",

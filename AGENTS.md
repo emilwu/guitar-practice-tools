@@ -4,7 +4,7 @@
 
 ## 約定
 
-- 每個工具一個子資料夾，從 repo 根目錄算起。現在有 `chord/`、`metronome/`、`fretboard/`（已上線）、`log/`（骨架，即將推出）。之後的工具同樣各開一個新資料夾。
+- 每個工具一個子資料夾，從 repo 根目錄算起。現在有 `chord/`、`metronome/`、`log/`、`fretboard/`（都已上線）。之後的工具同樣各開一個新資料夾。
 - 共用程式只放 `shared/`，每個工具用相對路徑 import，不要複製一份：
   - `shared/diagram.js`：指板與和弦圖 SVG
   - `shared/theory.js`：包在 `vendor/tonal` 上的理論
@@ -45,6 +45,47 @@ metronome/#bpm=60&meter=4/4&subdivision=eighth&swing=50&accents=mama
 ```
 
 `accents=mama` 是第 1、3 拍靜音，第 2、4 拍重音。頁面載入後可能補上 `mute=2/0&ladder=off`，聽到的拍相同。
+
+## 學習地圖嵌入
+
+學習地圖（https://emilwu.github.io/guitar-learning-map/）會把工具嵌在 iframe，或用 `?from=map` 打開。這兩種情況都顯示「← 回學習地圖」。在 iframe 裡連結用 `target="_top"`，並隱藏站頭、站尾，版面收緊。判斷和連結在 `shared/embed.js`，由 `shared/pwa.js` 載入，所以每個有載入 pwa 的工具都會有。`shared/embed-boot.js` 放在各頁 `<head>`，iframe 一解析就加上 `is-embedded`，避免先閃出站頭。
+
+各工具的 `<head>` 保留這一行（首頁沒有 `../`）：
+
+```html
+<script src="../shared/embed-boot.js"></script>
+```
+
+不要加 `X-Frame-Options`，也不要加會擋住同一個 GitHub Pages origin 的 `Content-Security-Policy` `frame-ancestors`。學習地圖和這個站都在 `emilwu.github.io`，嵌入必須成功。
+
+## 練習紀錄網址 hash
+
+學習地圖的「練習」做完，用這個 hash 打開練習紀錄並預填表單，不會自動儲存。出現下面任一參數就以 hash 為準。完全沒有這些參數時，表單是空白（日期是今天）。實作在 `log/log.js` 的 `parseHash` / `serializeHash`。
+
+參數接在 `#` 後面，格式同 query string。中文用一般的百分號編碼。
+
+| 參數 | 值 |
+| --- | --- |
+| `stage` | 自由文字。純數字會在 Markdown 裡寫成 `Stage 2` 這種 |
+| `week` | 自由文字。純數字會寫成 `第 3 週` |
+| `exercise` | 練習名稱 |
+| `tool` | `chord`、`metronome`、`fretboard`、`other`。其他文字當成 `other` |
+| `bpm` | 1–400 的整數。空的或超出範圍就省略 |
+| `date` | 選填，`YYYY-MM-DD`。省略則用今天 |
+| `minutes` | 選填，分鐘，可以是小數 |
+| `seconds` | 選填，秒，會加在分鐘上 |
+| `rating` | 選填，1–5 的整數，乾淨度／穩定度 |
+| `stuck` | 選填，卡點。太長時網址會把這段拿掉，表單裡仍可寫到 2000 字 |
+
+Stage 2、第 3 週、練習「八分音符」、節拍器、60 BPM：
+
+```
+log/#stage=2&week=3&exercise=八分音符&tool=metronome&bpm=60
+```
+
+紀錄存在 `localStorage` 的 `guitar-tools.log.v1`。計時器另外存在 `guitar-tools.log.timer.v1`。計時中離開分頁會照牆鐘繼續走，停止只把時長填進表單，要按儲存才會留下。匯出的 Markdown 是一張表：日期、Stage/週、練習、時長、BPM、評分、卡點，給計畫裡的 `PRACTICE_LOG.md` 貼上。
+
+節拍器頁有「記錄這次練習」，開到上面的 hash，並帶上當下聽到的 BPM 與 `tool=metronome`。若節拍器網址有 `?from=map`，連結會保留它。
 
 ## 吉他音色
 

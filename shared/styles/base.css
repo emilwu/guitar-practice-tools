@@ -120,3 +120,33 @@ button { cursor: pointer; touch-action: manipulation; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+.embed-back {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  width: min(1080px, calc(100% - 28px));
+  margin: 8px auto 0;
+  padding: 0 2px;
+  color: #f3d7a1;
+  font-weight: 700;
+  text-decoration: none;
+}
+html.is-embedded .site-header,
+html.is-embedded .site-footer,
+body.is-embedded .site-header,
+body.is-embedded .site-footer { display: none; }
+html.is-embedded body { padding-top: 0; }
+html.is-embedded .embed-back,
+body.is-embedded .embed-back {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  width: auto;
+  margin: 0;
+  background: #221c17;
+  border-bottom: 1px solid rgba(182, 137, 62, 0.35);
+  padding: calc(8px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) 8px calc(12px + env(safe-area-inset-left));
+}
+html.is-embedded .wrap,
+body.is-embedded .wrap { width: min(1080px, calc(100% - 16px)); }

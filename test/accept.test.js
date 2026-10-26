@@ -170,6 +170,10 @@ test("user-facing pages stay in Traditional Chinese", () => {
     "fretboard/app.js",
     "README.md",
     "AGENTS.md",
+    "log/index.html",
+    "log/app.js",
+    "log/log.js",
+    "shared/embed.js",
   ];
   const simplified = ["这个", "设置", "练习记录", "节拍器", "即将推出", "指板训练"];
   const required = ["和弦探索器", "節拍器", "練習紀錄", "指板訓練", "即將推出"];
@@ -193,9 +197,10 @@ test("every tool is registered once and the landing page reads that list", () =>
   assert.equal(TOOLS.find((tool) => tool.slug === "chord").status, "live");
   assert.equal(TOOLS.find((tool) => tool.slug === "metronome").status, "live");
   assert.equal(TOOLS.find((tool) => tool.slug === "fretboard").status, "live");
+  assert.equal(TOOLS.find((tool) => tool.slug === "log").status, "live");
   assert.deepEqual(
     TOOLS.filter((tool) => tool.status === "soon").map((tool) => tool.slug),
-    ["log"],
+    [],
   );
   const index = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const home = readFileSync(new URL("../shared/home.js", import.meta.url), "utf8");
@@ -222,11 +227,11 @@ test("nearest recorded fret stays on the same string", () => {
   }
   const worker = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
   assert.match(worker, /SAMPLE_GUITARS = \["greco", "yamaha"\]/);
-  assert.match(worker, /guitar-tools-v7/);
+  assert.match(worker, /guitar-tools-v8/);
   const pwa = readFileSync(new URL("../shared/pwa.js", import.meta.url), "utf8");
   assert.match(pwa, /new URL\("\.\.\/sw\.js", import\.meta\.url\)/);
   assert.match(pwa, /scope/);
-  for (const file of ["index.html", "chord/index.html", "metronome/index.html", "shared/home.js", "shared/registry.js", "shared/pwa.js", "fretboard/index.html", "fretboard/app.js"]) {
+  for (const file of ["index.html", "chord/index.html", "metronome/index.html", "log/index.html", "fretboard/index.html", "fretboard/app.js", "shared/home.js", "shared/registry.js", "shared/pwa.js", "shared/embed.js"]) {
     const text = readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
     assert.equal(/(?:href|src)=["']\//.test(text), false, file);
   }
