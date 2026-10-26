@@ -491,6 +491,22 @@ function placeTriad(stringNums, triad, inversion) {
 
 const INVERSIONS = ["根音位置", "第一轉位", "第二轉位"];
 
+const STRING_PLAIN = {
+  "123": "第 1–3 弦（高音三條）",
+  "234": "第 2–4 弦（中間三條）",
+};
+
+function fretRangeLabel(frets) {
+  const used = frets.filter((fret) => typeof fret === "number");
+  if (!used.length) return "";
+  const min = Math.min(...used);
+  const max = Math.max(...used);
+  if (max === 0) return "空弦";
+  if (min === 0) return `空弦到第 ${max} 格`;
+  if (min === max) return `第 ${min} 格`;
+  return `第 ${min}–${max} 格`;
+}
+
 export function triadShapes(chord, reference) {
   const triad = triadMembers(chord);
   if (triad.length < 3) return [];
@@ -526,15 +542,22 @@ export function triadShapes(chord, reference) {
           label: tone?.label || "",
         });
       });
+      const ordered = [...notes].sort((a, b) => a.midi - b.midi);
+      const orderLabel = ordered.map((note) => note.name).join("–");
+      const degreeLabel = ordered.map((note) => note.label).join("–");
       shapes.push({
         id: `${set.id}-${inv}-${best.map((f) => (f === null ? "x" : f)).join(".")}`,
         frets: best,
         notes,
         setId: set.id,
         setLabel: set.label,
+        stringPlain: STRING_PLAIN[set.id] || set.label,
         inversion: inv,
         inversionLabel: INVERSIONS[inv],
-        label: `${set.label} · ${INVERSIONS[inv]}`,
+        orderLabel,
+        degreeLabel,
+        fretRange: fretRangeLabel(best),
+        label: `${STRING_PLAIN[set.id] || set.label} · ${INVERSIONS[inv]} · ${orderLabel}`,
         distance: reference ? bestCost : 0,
         nearest: false,
         source: "triad",

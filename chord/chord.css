@@ -66,7 +66,17 @@ input[type="text"] {
   text-align: center;
 }
 .voicing-card { width: 168px; flex: 0 0 auto; }
-.triad-card { width: 132px; flex: 0 0 auto; }
+.triad-card { width: 188px; flex: 0 0 auto; }
+.triad-help { margin: 4px 0 8px; }
+.triad-help summary {
+  min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; width: fit-content;
+}
+.triad-help-body { color: var(--ink-soft); font-size: 15px; }
+.triad-help-body p { margin: 8px 0; }
+.triad-help-body ul { margin: 6px 0 6px 1.2em; padding: 0; }
+.triad-kicker, .triad-meta { display: block; color: var(--ink-soft); font-size: 12px; line-height: 1.35; }
+.triad-card strong { display: block; font-size: 16px; margin-top: 2px; }
+.triad-order { display: block; font-family: Palatino, "Iowan Old Style", serif; font-size: 18px; letter-spacing: 0.01em; }
 .voicing-card.is-on, .triad-card.is-near { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
 .voicing-card small, .triad-card small, .step-card small { display: block; color: var(--ink-soft); font-size: 12px; line-height: 1.35; min-height: 2.6em; }
 .voicing-card svg, .triad-card svg, .step-card svg { width: 100%; height: auto; display: block; }
@@ -78,6 +88,9 @@ input[type="text"] {
 .diag-barre { fill: rgba(36, 28, 22, 0.88); }
 .diag-open { fill: none; stroke: #2a2118; stroke-width: 1.4; }
 .diag-mark, .diag-fretnum { fill: #2a2118; font-size: 13px; font-weight: 700; }
+.dot.is-root { stroke: #3a2a12; stroke-width: 1.8; }
+.dot-note { fill: #2a2118; font-size: 9px; font-weight: 700; font-family: Palatino, "Iowan Old Style", serif; }
+.dot-note.is-root { fill: #8a5a00; }
 .fret-num, .string-no { fill: #e7d7c3; font-size: 11px; font-family: inherit; }
 .neck-wood { fill: #5a3928; }
 .neck-nut { fill: #f3eadc; }

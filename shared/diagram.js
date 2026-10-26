@@ -34,6 +34,7 @@ export function describeFrets(frets) {
 }
 
 export function chordDiagramSvg(voicing, options = {}) {
+  const annotate = options.annotate === true;
   const frets = voicing.frets;
   const fretted = frets.filter((fret) => typeof fret === "number" && fret > 0);
   const min = fretted.length ? Math.min(...fretted) : 1;
@@ -41,11 +42,11 @@ export function chordDiagramSvg(voicing, options = {}) {
   const base = showNut ? 1 : min;
   const rows = 4;
   const left = 28;
-  const top = 32;
+  const top = annotate ? 48 : 32;
   const gapX = 18;
-  const gapY = 22;
+  const gapY = annotate ? 34 : 22;
   const width = left + gapX * 5 + 18;
-  const height = top + gapY * rows + 16;
+  const height = top + gapY * rows + (annotate ? 28 : 16);
   const stringX = (index) => left + index * gapX;
   const fretY = (row) => top + row * gapY;
   const parts = [];
@@ -87,7 +88,17 @@ export function chordDiagramSvg(voicing, options = {}) {
       return;
     }
     if (fret === 0) {
-      parts.push(`<circle class="diag-open" cx="${x}" cy="14" r="5"></circle>`);
+      const note = voicing.notes?.find((item) => item.stringIndex === index);
+      const root = note?.label === "R";
+      if (annotate && note?.label) {
+        parts.push(`<circle class="dot dot-${kindOf(note.label)}${root ? " is-root" : ""}" cx="${x}" cy="22" r="8"></circle>`);
+        parts.push(`<text class="dot-label" x="${x}" y="25" text-anchor="middle">${escapeXml(note.label)}</text>`);
+        parts.push(
+          `<text class="dot-note${root ? " is-root" : ""}" x="${x}" y="40" text-anchor="middle">${escapeXml(note.name)}</text>`,
+        );
+      } else {
+        parts.push(`<circle class="diag-open" cx="${x}" cy="14" r="5"></circle>`);
+      }
       return;
     }
     const row = fret - base;
@@ -95,9 +106,15 @@ export function chordDiagramSvg(voicing, options = {}) {
     const y = fretY(row) + gapY / 2;
     const note = voicing.notes?.find((item) => item.stringIndex === index);
     const kind = kindOf(note?.label);
-    parts.push(`<circle class="dot dot-${kind}" cx="${x}" cy="${y}" r="8"></circle>`);
+    const root = note?.label === "R";
+    parts.push(`<circle class="dot dot-${kind}${root ? " is-root" : ""}" cx="${x}" cy="${y}" r="8"></circle>`);
     if (note?.label) {
       parts.push(`<text class="dot-label" x="${x}" y="${y + 3}" text-anchor="middle">${escapeXml(note.label)}</text>`);
+    }
+    if (annotate && note?.name) {
+      parts.push(
+        `<text class="dot-note${root ? " is-root" : ""}" x="${x}" y="${y + 14}" text-anchor="middle">${escapeXml(note.name)}</text>`,
+      );
     }
   });
   const title = `${voicing.label || "按法"}，${describeFrets(frets)}`;

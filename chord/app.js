@@ -6,6 +6,7 @@ import { parseChord } from "../shared/theory.js";
 import { explainChord } from "./explain.js";
 import { analyzeScale, buildMarkers, scaleChoices } from "./scales.js";
 import { loadState, saveState, serializeHash } from "./state.js";
+import { triadLesson } from "./triads.js";
 import { bestNextVoicing, triadShapes, voicingsFor } from "./voicings.js";
 import { commonToneNames, guideToneLines, progressionFor, voiceLeadProgression } from "./voiceleading.js";
 
@@ -109,16 +110,43 @@ function neckHtml(chord, analysis, neck) {
 
 function triadsHtml(chord, selected) {
   const shapes = triadShapes(chord, selected);
-  if (!shapes.length) return `<h2>三和弦</h2><p>這個和弦沒有完整的三音骨架。</p>`;
+  if (!shapes.length) return `<h2>三和弦／琶音</h2><p>這個和弦沒有完整的三音骨架。</p>`;
+  const lesson = triadLesson(chord);
+  const qualities = lesson.qualities
+    .map((item) => `<li>${esc(item.name)}：${esc(item.formula)}</li>`)
+    .join("");
+  const inversions = lesson.inversions
+    .map((item) => `<li>${esc(item.name)}：最低音是 ${esc(item.bass)}，低到高 ${esc(item.order)}</li>`)
+    .join("");
+  const upper = lesson.upperText ? `<p>${esc(lesson.upperText)}</p>` : "";
   const cards = shapes
     .map((shape, index) => {
+      const near = shape.nearest ? `<em class="near-tag">最靠近</em>` : "";
       return `<button type="button" class="triad-card${shape.nearest ? " is-near" : ""}" data-triad="${index}">
-        <small>${esc(shape.label)}${shape.nearest ? `<em class="near-tag">最靠近</em>` : ""}</small>
-        ${chordDiagramSvg(shape, { selected: shape.nearest })}
+        <span class="triad-kicker">${esc(shape.stringPlain)}</span>
+        <strong>${esc(shape.inversionLabel)}</strong>
+        <span class="triad-order">${esc(shape.orderLabel)}</span>
+        <span class="triad-meta">${esc(shape.fretRange)} · ${esc(shape.degreeLabel)} ${near}</span>
+        ${chordDiagramSvg(shape, { selected: shape.nearest, annotate: true })}
       </button>`;
     })
     .join("");
-  return `<h2>三和弦／琶音</h2><p class="hint">根音位置與兩個轉位，弦組 1-2-3、2-3-4。標成「最靠近」的是離目前按法最近的那個。點一下可以聽這三個音。</p><div class="triad-grid">${cards}</div>`;
+  return `<h2>三和弦／琶音</h2>
+    <details class="triad-help">
+      <summary>這是什麼？</summary>
+      <div class="triad-help-body">
+        <p>三和弦是三個音：根音 R、三度（3 或 b3）、五度（5、b5 或 #5）。</p>
+        <ul>${qualities}</ul>
+        <p>${esc(lesson.relation)}</p>
+        ${upper}
+        <p>轉位就是換哪一個音放在最低。</p>
+        <ul>${inversions}</ul>
+        <p>第 1–3 弦是高音三條，伴奏和旋律都好用；第 2–4 弦再低一點，也很好按。更低的弦組以後再加。</p>
+      </div>
+    </details>
+    <p class="hint">「最靠近」是離上面你選的那個按法最近的三音，手不用挪很遠。點一下可以聽這三個音。</p>
+    <p class="hint">練法：同一組弦上，把三個轉位沿著琴頸連起來，再對著這個和弦把這三個音拆開彈。</p>
+    <div class="triad-grid">${cards}</div>`;
 }
 
 function scalesHtml(chord, choices, analysis) {
