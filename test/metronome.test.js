@@ -218,7 +218,7 @@ test("docs publish the metronome hash, and the scheduler is not setInterval", ()
   assert.match(app, /currentTime/);
   assert.match(app, /setTimeout/);
   const worker = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
-  assert.match(worker, /guitar-tools-v6/);
+  assert.match(worker, /guitar-tools-v7/);
   for (const file of ["./metronome/app.js", "./metronome/timing.js", "./metronome/metronome.css", "./chord/triads.js"]) {
     assert.ok(worker.includes(file), file);
   }
