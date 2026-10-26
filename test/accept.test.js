@@ -166,6 +166,8 @@ test("user-facing pages stay in Traditional Chinese", () => {
     "metronome/index.html",
     "metronome/app.js",
     "metronome/timing.js",
+    "fretboard/index.html",
+    "fretboard/app.js",
     "README.md",
     "AGENTS.md",
   ];
@@ -190,9 +192,10 @@ test("every tool is registered once and the landing page reads that list", () =>
   );
   assert.equal(TOOLS.find((tool) => tool.slug === "chord").status, "live");
   assert.equal(TOOLS.find((tool) => tool.slug === "metronome").status, "live");
+  assert.equal(TOOLS.find((tool) => tool.slug === "fretboard").status, "live");
   assert.deepEqual(
     TOOLS.filter((tool) => tool.status === "soon").map((tool) => tool.slug),
-    ["log", "fretboard"],
+    ["log"],
   );
   const index = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const home = readFileSync(new URL("../shared/home.js", import.meta.url), "utf8");
@@ -219,11 +222,11 @@ test("nearest recorded fret stays on the same string", () => {
   }
   const worker = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
   assert.match(worker, /SAMPLE_GUITARS = \["greco", "yamaha"\]/);
-  assert.match(worker, /guitar-tools-v6/);
+  assert.match(worker, /guitar-tools-v7/);
   const pwa = readFileSync(new URL("../shared/pwa.js", import.meta.url), "utf8");
   assert.match(pwa, /new URL\("\.\.\/sw\.js", import\.meta\.url\)/);
   assert.match(pwa, /scope/);
-  for (const file of ["index.html", "chord/index.html", "metronome/index.html", "shared/home.js", "shared/registry.js", "shared/pwa.js"]) {
+  for (const file of ["index.html", "chord/index.html", "metronome/index.html", "shared/home.js", "shared/registry.js", "shared/pwa.js", "fretboard/index.html", "fretboard/app.js"]) {
     const text = readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
     assert.equal(/(?:href|src)=["']\//.test(text), false, file);
   }

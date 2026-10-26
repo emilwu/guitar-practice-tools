@@ -1,0 +1,119 @@
+.fb { padding-bottom: 28px; }
+.fb-title { margin: 0 0 10px; font-size: 28px; }
+.panel {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius);
+  padding: 18px 18px 16px;
+  margin: 14px 0;
+  box-shadow: var(--shadow);
+}
+.panel h2 { margin: 0 0 8px; font-size: 20px; }
+.hint, .panel .muted { color: var(--ink-soft); font-size: 15px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.option-block { margin: 12px 0; }
+.option-block p { margin: 0 0 6px; }
+.chip {
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink);
+  border-radius: 999px;
+  min-height: 44px;
+  padding: 0 12px;
+}
+.chip[aria-pressed="true"], .chip.is-on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+button.pill { border: 0; }
+button.quiet {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fffaf3;
+  color: var(--ink);
+}
+.prompt-note {
+  font-family: "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-size: 64px;
+  line-height: 1;
+  margin: 6px 0;
+}
+.status-line { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; margin: 0; }
+.timer { font-variant-numeric: tabular-nums; font-weight: 700; }
+.feedback { min-height: 1.4em; margin: 8px 0; font-weight: 700; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.answer {
+  min-height: 52px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink);
+  font-family: Palatino, "Iowan Old Style", serif;
+  font-size: 20px;
+}
+.answer.is-good { background: #1f8a78; color: #fffaf3; border-color: #1f8a78; }
+.answer.is-bad { background: #c4492a; color: #fffaf3; border-color: #c4492a; }
+kbd {
+  font-family: inherit;
+  font-size: 11px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 4px;
+  margin-left: 4px;
+  color: var(--ink-soft);
+}
+.answer kbd, .chip kbd { color: inherit; border-color: currentColor; opacity: 0.7; }
+.fret-fields { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.fret-fields input {
+  width: 4.5em;
+  min-height: 44px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #fffaf3;
+  color: var(--ink);
+  padding: 0 8px;
+}
+.neck-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #2a1b13;
+  border-radius: 16px;
+  padding: 8px;
+  margin-top: 8px;
+}
+.fret-num, .string-no { fill: #e7d7c3; font-size: 12px; font-family: inherit; }
+.neck-wood { fill: #5a3928; }
+.neck-nut { fill: #f3eadc; }
+.neck-fret { stroke: #e6d3b8; stroke-width: 2; }
+.neck-string { stroke: #f7f1e6; }
+.inlay { fill: #f3eadc; opacity: 0.8; }
+.neck-target { cursor: pointer; }
+.neck-hit.is-good { fill: #1f8a78; stroke: none; }
+.neck-hit.is-bad { fill: #c4492a; stroke: none; }
+.neck-hit.is-on { fill: #3c57c4; stroke: none; }
+.neck-hit.is-root { fill: #e0a106; stroke: #3a2a12; stroke-width: 2; }
+.neck-hit.is-lit { fill: #f4ecdf; stroke: #241c16; stroke-width: 1.5; }
+.neck-hit.is-miss { fill: transparent; stroke: #c4492a; stroke-width: 2.5; stroke-dasharray: 3 2; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 14px; font-size: 13px; color: var(--ink-soft); margin-top: 8px; }
+.stats-grid { display: grid; gap: 14px; }
+.stats-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.stats-table th, .stats-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.weak-list { margin: 8px 0 0; padding-left: 1.2em; }
+.heat-strong { background: #1f8a78; }
+.heat-weak { background: #c4492a; }
+@media (min-width: 800px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid .span-2 { grid-column: 1 / -1; }
+}
+@media (pointer: coarse) {
+  .desktop-only { display: none; }
+}
+@media (max-width: 640px) {
+  .prompt-note { font-size: 52px; }
+}

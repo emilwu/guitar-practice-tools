@@ -1,4 +1,4 @@
-const CACHE = "guitar-tools-v6";
+const CACHE = "guitar-tools-v7";
 const SAMPLE_GUITARS = ["greco", "yamaha"];
 const SAMPLE_FRETS = [0, 4, 8, 12];
 const ASSETS = [
@@ -12,6 +12,7 @@ const ASSETS = [
   "./shared/pwa.js",
   "./shared/pitch.js",
   "./shared/theory.js",
+  "./shared/boxes.js",
   "./shared/diagram.js",
   "./shared/audio.js",
   "./shared/tone.js",
@@ -35,6 +36,11 @@ const ASSETS = [
   "./log/index.html",
   "./fretboard/",
   "./fretboard/index.html",
+  "./fretboard/fretboard.css",
+  "./fretboard/app.js",
+  "./fretboard/logic.js",
+  "./fretboard/state.js",
+  "./fretboard/stats.js",
   "./vendor/tonal/tonal.js",
   "./vendor/chords-db/guitar.js",
 ];
