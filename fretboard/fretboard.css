@@ -82,6 +82,7 @@ kbd {
 .neck-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  max-width: 100%;
   background: #2a1b13;
   border-radius: 16px;
   padding: 8px;
@@ -101,14 +102,15 @@ kbd {
 .neck-hit.is-lit { fill: #f4ecdf; stroke: #241c16; stroke-width: 1.5; }
 .neck-hit.is-miss { fill: transparent; stroke: #c4492a; stroke-width: 2.5; stroke-dasharray: 3 2; }
 .legend { display: flex; flex-wrap: wrap; gap: 10px 14px; font-size: 13px; color: var(--ink-soft); margin-top: 8px; }
-.stats-grid { display: grid; gap: 14px; }
+.stats-grid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+.stats-grid > * { min-width: 0; }
 .stats-table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .stats-table th, .stats-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
 .weak-list { margin: 8px 0 0; padding-left: 1.2em; }
 .heat-strong { background: #1f8a78; }
 .heat-weak { background: #c4492a; }
 @media (min-width: 800px) {
-  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .stats-grid .span-2 { grid-column: 1 / -1; }
 }
 @media (pointer: coarse) {
