@@ -4,7 +4,8 @@ import { test } from "node:test";
 import { pentatonicBox, analyzeScale, scaleChoices } from "../chord/scales.js";
 import { parseHash, serializeHash } from "../chord/state.js";
 import { guideToneLines, progressionFor } from "../chord/voiceleading.js";
-import { fretSpan, voicingsFor } from "../chord/voicings.js";
+import { triadLesson } from "../chord/triads.js";
+import { fretSpan, triadShapes, voicingsFor } from "../chord/voicings.js";
 import { chordDiagramSvg, neckSvg } from "../shared/diagram.js";
 import { parseChord } from "../shared/theory.js";
 import { TOOLS } from "../shared/registry.js";
@@ -214,7 +215,7 @@ test("nearest recorded fret stays on the same string", () => {
   }
   const worker = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
   assert.match(worker, /SAMPLE_GUITARS = \["greco", "yamaha"\]/);
-  assert.match(worker, /guitar-tools-v4/);
+  assert.match(worker, /guitar-tools-v5/);
   const pwa = readFileSync(new URL("../shared/pwa.js", import.meta.url), "utf8");
   assert.match(pwa, /new URL\("\.\.\/sw\.js", import\.meta\.url\)/);
   assert.match(pwa, /scope/);
@@ -264,4 +265,37 @@ test("nearest recorded fret stays on the same string", () => {
   channel[1200] = 0.4;
   const offset = leadingSilenceOffset(channel, 48000);
   assert.ok(offset > 0.02 && offset < 0.025);
+});
+
+test("triad inversions spell low to high", () => {
+  const am7 = parseChord("Am7");
+  const amGroups = triadShapes(am7, null).filter((shape) => shape.setId === "123");
+  assert.deepEqual(
+    amGroups.map((shape) => shape.orderLabel),
+    ["A–C–E", "C–E–A", "E–A–C"],
+  );
+  assert.deepEqual(
+    amGroups.map((shape) => shape.inversionLabel),
+    ["根音位置", "第一轉位", "第二轉位"],
+  );
+  assert.equal(amGroups[0].stringPlain, "第 1–3 弦（高音三條）");
+  assert.match(amGroups[0].degreeLabel, /^R–/);
+  const lesson = triadLesson(am7);
+  assert.deepEqual(
+    lesson.inversions.map((item) => item.order),
+    ["A–C–E", "C–E–A", "E–A–C"],
+  );
+  assert.match(lesson.relation, /Am（A C E）/);
+  assert.match(lesson.relation, /G（b7）/);
+  assert.match(lesson.upperText, /上三和弦/);
+  assert.match(lesson.upperText, /C（C E G）/);
+
+  const cShapes = triadShapes(parseChord("C"), null).filter((shape) => shape.setId === "123");
+  assert.deepEqual(
+    cShapes.map((shape) => shape.orderLabel),
+    ["C–E–G", "E–G–C", "G–C–E"],
+  );
+  const cLesson = triadLesson(parseChord("C"));
+  assert.equal(cLesson.upperText, "");
+  assert.match(cLesson.relation, /C E G/);
 });
