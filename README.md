@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | T1 | [和弦探索器](chord/) | 可用 |
 | T2 | [節拍器](metronome/) | 可用 |
-| T3 | 練習紀錄 | 即將推出 |
+| T3 | [練習紀錄](log/) | 可用 |
 | T4 | [指板訓練](fretboard/) | 可用 |
 
 和弦探索器可以：
@@ -59,6 +59,8 @@ metronome/#bpm=60&meter=4/4&subdivision=eighth&swing=50&accents=mama
 
 `accents=mama` 是第 1、3 拍靜音，第 2、4 拍重音。打開之後網址可能多出 `mute=2/0&ladder=off`，聽到的拍一樣。
 
+節拍器上方有「記錄這次練習」。它會打開練習紀錄，並帶上現在聽到的 BPM。
+
 指板訓練可以：
 
 - 找音：看到音名，把選定弦與品格範圍裡的每一格都點出來。
@@ -97,9 +99,47 @@ metronome/#bpm=60&meter=4/4&subdivision=eighth&swing=50&accents=mama
 - 說出兩個點的音程：`fretboard/#mode=interval&imode=name`
 - A 小調五聲 E 型（第 1 框）：`fretboard/#mode=scale&key=A&scale=min-pent&shape=E`
 
+## 練習紀錄
+
+練習紀錄可以：
+
+- 開始、暫停、停止這一輪。停止把時長填進表單，不會自動儲存。離開分頁時，進行中的計時照牆鐘繼續走。
+- 手動記一筆：日期、時長、Stage、週、練習名稱、用了哪個工具（和弦探索器、節拍器、指板訓練、其他）、到達的 BPM、1–5 的乾淨度／穩定度、卡點。
+- 看今天、本週（週一到週日）的總時長，以及連續天數。今天還沒練、昨天有練，連續還算著。
+- 看同一個練習名稱的 BPM 走勢（自畫的 SVG）。
+- 看最近的卡點，方便之後調整課程。
+- 匯出、匯入 JSON。匯入以每筆的 id 合併，同一筆以後來的為準，不會刪掉這台裝置上多出來的紀錄。
+- 複製 Markdown 表格，貼進計畫裡的 `PRACTICE_LOG.md`。欄位是：日期、Stage/週、練習、時長、BPM、評分、卡點。
+
+資料在 `localStorage` 的 `guitar-tools.log.v1`，計時器在 `guitar-tools.log.timer.v1`。沒有帳號，也不會同步到別的裝置。
+
+### 練習紀錄網址 hash
+
+學習地圖的練習步驟可以連到這裡預填表單，不會自動寫進紀錄。參數接在 `#` 後面。
+
+| 參數 | 值 |
+| --- | --- |
+| `stage` | 自由文字，例如 `2` |
+| `week` | 自由文字，例如 `3` |
+| `exercise` | 練習名稱 |
+| `tool` | `chord`、`metronome`、`fretboard`、`other` |
+| `bpm` | 1–400 的整數 |
+| `date` | 選填，`YYYY-MM-DD` |
+| `minutes`、`seconds` | 選填，預填時長 |
+| `rating` | 選填，1–5 |
+| `stuck` | 選填，卡點 |
+
+```
+log/#stage=2&week=3&exercise=八分音符&tool=metronome&bpm=60
+```
+
+### 從學習地圖回來
+
+工具頁若網址帶 `?from=map`，或被放在 iframe 裡，會出現「← 回學習地圖」，連到 <https://emilwu.github.io/guitar-learning-map/>。在 iframe 裡用 `target="_top"` 打開，並隱藏本站的站頭。頁面沒有 `X-Frame-Options` 或 `frame-ancestors`，同一個 GitHub Pages 站可以嵌進來。
+
 ## 一個 repo，之後的工具都放這裡
 
-這個 repo 是所有練習工具的家，不要再開新的 repo。每個工具一個子資料夾：`chord/`、`metronome/`、`fretboard/` 已上線，`log/` 是即將推出的骨架。新工具同樣在根目錄開資料夾，從 `shared/` 引用指板 SVG、理論、撥弦和全站樣式，第三方程式庫只用 `vendor/`，並在 `shared/registry.js` 登記一筆。首頁的工具卡只讀這份清單。約定寫在 [AGENTS.md](AGENTS.md)。
+這個 repo 是所有練習工具的家，不要再開新的 repo。每個工具一個子資料夾：`chord/`、`metronome/`、`log/`、`fretboard/` 都已上線。新工具同樣在根目錄開資料夾，從 `shared/` 引用指板 SVG、理論、撥弦和全站樣式，第三方程式庫只用 `vendor/`，並在 `shared/registry.js` 登記一筆。首頁的工具卡只讀這份清單。約定寫在 [AGENTS.md](AGENTS.md)。
 
 ## 在本機開啟
 
@@ -134,6 +174,9 @@ node --test test/*.test.js
 9. 打開節拍器的 60 BPM 八分音符預設（hash 是 `bpm=60&meter=4/4&subdivision=eighth&swing=50&accents=mama`），第 1 與第 3 拍靜音、第 2 與第 4 拍是重音。空白鍵可以開始，方向鍵可以調 BPM。
 10. 把視窗縮到手機寬度，開始、點拍、拍點都點得到，大數字在譜架距離仍看得清。
 11. 打開指板訓練的找音（`fretboard/#mode=find&naturals=1&frets=0-12&timer=60`），把範圍裡的每一格點完再看答案。識音、音程、A 小調五聲 E 型也各走一輪。手機寬度下指板可以橫向捲動，音名按鈕點得到。
+12. 打開 `log/#stage=2&week=3&exercise=八分音符&tool=metronome&bpm=60`，表單已被預填。計時按停止後時長會填進去。寫下卡點再儲存，今天和本週的時間會增加，卡點出現在清單裡。複製 Markdown 可以得到一張表。
+13. 節拍器按「記錄這次練習」，練習紀錄會帶上當時的 BPM。
+14. 工具頁加上 `?from=map` 會出現「← 回學習地圖」。把和弦、節拍器、練習紀錄、指板訓練放進 iframe，站頭會隱藏，返回連結以整頁打開學習地圖。
 
 ## 如何更新 vendor 函式庫
 
@@ -152,7 +195,9 @@ node scripts/vendor.mjs
 
 ## 已知限制
 
-- T3 練習紀錄只有資料夾和「即將推出」頁，功能還沒做。
+- 練習紀錄只存在這台瀏覽器。清除網站資料或換裝置前要自己匯出 JSON，否則紀錄會不見。匯入不會刪掉這台裝置上多出來的筆數。
+- 連續天數用裝置的本地日期，中間斷一天就歸零。一週從週一算到週日。BPM 圖只把練習名稱完全相同的紀錄畫在一起，最多最近 40 筆。
+- 計時中若沒按暫停就離開，時間會繼續走。停止不會自動儲存。iOS 可能凍結分頁，回到頁面後才用牆鐘把經過的時間補上。
 - 節拍器的點擊是合成的，不是鼓組。Swing 只作用在八分音符；67% 是三連音 2:1 的整數近似（實際約 66.7%）。
 - BPM 是拍號分母的速度。靜音小節時大數字不跟每一拍跳。階梯走到目標後會停在目標速度。
 - 分頁在背景時用音訊時鐘排程。瀏覽器若把計時器拉得很慢，仍靠較長的預排撐住；若整個頁面被暫停，回到前景會對齊而不補點。iOS 可能在背景直接停掉聲音。

@@ -21,8 +21,8 @@ export const TOOLS = [
     slug: "log",
     href: "log/",
     name: "練習紀錄",
-    summary: "一行紀錄、BPM 趨勢、匯出。把每天練了什麼留下來。",
-    status: "soon",
+    summary: "計時、一行紀錄、BPM 走勢、卡點，並匯出。把每天練了什麼留下來。",
+    status: "live",
   },
   {
     id: "T4",

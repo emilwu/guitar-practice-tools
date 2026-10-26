@@ -282,9 +282,20 @@ function latestCue(now) {
   return current;
 }
 
+function syncLogLink(bpm) {
+  const logLink = document.querySelector("#log-practice");
+  if (!logLink) return;
+  const params = new URLSearchParams();
+  params.set("tool", "metronome");
+  params.set("bpm", String(bpm));
+  const from = new URLSearchParams(location.search).get("from");
+  logLink.href = `../log/${from ? `?from=${encodeURIComponent(from)}` : ""}#${params.toString()}`;
+}
+
 function paintReadout(cue) {
   const bpm = cue?.bpm ?? displayedBpm();
   liveBpm.textContent = String(bpm);
+  syncLogLink(bpm);
   standMeta.textContent = metaText();
   if (!running) {
     kicker.textContent = "準備";
