@@ -29,7 +29,7 @@ export const TOOLS = [
     slug: "fretboard",
     href: "fretboard/",
     name: "指板訓練",
-    summary: "找音、認音、音程，搭配五聲框 1–5。第 1 框的根音在第 6 弦。",
-    status: "soon",
+    summary: "找音、識音、音程，以及音階與五聲框。第 1 框的根音在第 6 弦。",
+    status: "live",
   },
 ];

@@ -4,7 +4,7 @@
 
 ## 約定
 
-- 每個工具一個子資料夾，從 repo 根目錄算起。現在有 `chord/`、`metronome/`（已上線）、`log/`、`fretboard/`（骨架，即將推出）。之後的工具同樣各開一個新資料夾。
+- 每個工具一個子資料夾，從 repo 根目錄算起。現在有 `chord/`、`metronome/`、`fretboard/`（已上線）、`log/`（骨架，即將推出）。之後的工具同樣各開一個新資料夾。
 - 共用程式只放 `shared/`，每個工具用相對路徑 import，不要複製一份：
   - `shared/diagram.js`：指板與和弦圖 SVG
   - `shared/theory.js`：包在 `vendor/tonal` 上的理論
@@ -12,6 +12,7 @@
   - `shared/tone.js`：吉他音色選擇，各工具共用
   - `shared/styles/base.css`：全站樣式
   - `shared/pitch.js`：空弦音高，給上面幾個模組用
+  - `shared/boxes.js`：五聲框 1–5，和弦頁和指板訓練共用
 - 第三方程式庫只放 `vendor/`，每個目錄附上授權檔。不要用 CDN。更新用 `node scripts/vendor.mjs`，而且只收 MIT 或相容授權。
 - 工具自己的邏輯、文案、樣式留在該工具的資料夾。第二個工具也需要同一段程式時，再升到 `shared/`。
 - 新工具要在 `shared/registry.js` 加一筆。首頁只讀這份清單來畫工具卡，不要在 `index.html` 手寫。
@@ -56,3 +57,24 @@ metronome/#bpm=60&meter=4/4&subdivision=eighth&swing=50&accents=mama
 3. 在 `sw.js` 的 `SAMPLE_GUITARS` 加上同一個 id，第一次載入才會把取樣存進離線快取。
 
 每個工具都用 `shared/audio.js` 撥弦，並用 `mountToneSelect`（`shared/tone.js`）畫出「吉他音色」。選擇寫在 `localStorage` 的 `guitar-tools.tone.v1`，所有工具讀同一把。選「合成」，或取樣還沒進快取、載入失敗時，回到 Karplus–Strong。
+
+## 指板訓練的 hash
+
+`fretboard/` 已上線。學習地圖要深連時，用 `fretboard/#` 後面的查詢字串，不要為了預設另開頁面。沒寫的參數用預設。升記號寫成 `%23`。
+
+| 參數 | 值 | 預設 |
+| --- | --- | --- |
+| `mode` | `find` 找音、`name` 識音、`interval` 音程、`scale` 音階 | `find` |
+| `imode` | `locate` 找出音程、`name` 說出音程 | `locate` |
+| `strings` | `1`–`6` 的數字，`1` 是高音 E，例如 `321` | `654321` |
+| `frets` | `最小-最大`，0 到 15，例如 `0-12` | `0-12` |
+| `naturals` | `1` 或 `0` | `0` |
+| `timer` | 秒數，`0` 表示不計時 | `0` |
+| `spell` | `sharp` 或 `flat` | `sharp` |
+| `sound` | `1` 或 `0` | `1` |
+| `key` | 音名，例如 `A`、`Bb`、`F%23` | `A` |
+| `scale` | `major`、`minor`、`maj-pent`、`min-pent`、`blues` | `min-pent` |
+| `shape` | CAGED：`C`、`A`、`G`、`E`、`D`。五聲第 1 框是 `E` | `E` |
+| `degrees` | 級數，逗號分開，例如 `b3,3,5,b7`。`#4` 會收成 `b5` | 十二個級數 |
+
+例子：`fretboard/#mode=find&naturals=1&frets=0-12&timer=60`、`fretboard/#mode=scale&key=A&scale=min-pent&shape=E`。設定另外寫在 `localStorage` 的 `guitar-tools.fretboard.v1`，統計在 `guitar-tools.fretboard.stats.v1`。五聲框的格子資料在 `shared/boxes.js`，和弦頁也用同一份。

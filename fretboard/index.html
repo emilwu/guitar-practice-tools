@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#1a1612">
-  <title>指板訓練｜即將推出</title>
+  <title>指板訓練｜吉他練習工具</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../shared/styles/base.css">
+  <link rel="stylesheet" href="./fretboard.css">
 </head>
-<body data-tool="fretboard">
+<body>
   <header class="site-header">
     <a class="brand" href="../">
       <span class="seal" aria-hidden="true">練</span>
@@ -16,14 +17,28 @@
     </a>
     <a href="../">回練習台</a>
   </header>
-  <main class="wrap">
-    <section class="paper" style="padding: 28px 22px;">
-      <p class="styles">即將推出</p>
-      <h1 id="soon-title">指板訓練</h1>
-      <p id="soon-body" class="lede">這個工具即將推出，完成後會留在這個資料夾。</p>
-      <p><a class="pill" href="../">回練習台</a></p>
+  <main class="wrap fb" id="app">
+    <section class="panel" id="sec-play">
+      <h1 class="fb-title">指板訓練</h1>
+      <div id="modes" class="row" role="tablist" aria-label="練習模式"></div>
+      <div id="prompt"></div>
+      <p id="status-line" class="status-line"></p>
+      <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+      <div id="board"></div>
+      <div id="actions" class="actions"></div>
+      <div id="answers"></div>
+    </section>
+    <section class="panel" id="sec-options">
+      <h2>範圍</h2>
+      <div id="options"></div>
+      <div id="tone-slot"></div>
+    </section>
+    <section class="panel" id="sec-stats">
+      <div id="stats"></div>
     </section>
   </main>
-  <script type="module" src="../shared/soon.js"></script>
+  <footer class="site-footer">標準調弦，品格練到第 15 格。統計留在這台裝置。指板可以左右滑。</footer>
+  <script type="module" src="./app.js"></script>
+  <noscript>這個頁面需要 JavaScript。</noscript>
 </body>
 </html>

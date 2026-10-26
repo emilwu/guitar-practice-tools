@@ -121,19 +121,43 @@ export function chordDiagramSvg(voicing, options = {}) {
   return `<svg class="chord-diagram${options.selected ? " is-selected" : ""}" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeXml(title)}"><title>${escapeXml(title)}</title>${parts.join("")}</svg>`;
 }
 
-export function neckSvg({ markers = [], fretCount = 16 } = {}) {
+function heatFill(heat) {
+  const t = Math.max(0, Math.min(1, Number(heat)));
+  const r = Math.round(31 + (196 - 31) * t);
+  const g = Math.round(138 + (73 - 138) * t);
+  const b = Math.round(120 + (42 - 120) * t);
+  return `rgb(${r},${g},${b})`;
+}
+
+export function neckSvg({
+  markers = [],
+  fretCount = 16,
+  targets = [],
+  highlight = null,
+  ariaLabel = "指板，依音程標色",
+  role = "img",
+  fretW = 46,
+  stringGap = 28,
+  left = 64,
+  hitR = 14,
+} = {}) {
   const frets = Math.max(12, fretCount);
-  const left = 64;
   const top = 16;
-  const fretW = 46;
-  const stringGap = 28;
   const strings = 6;
   const width = left + frets * fretW + 20;
   const height = top + (strings - 1) * stringGap + 36;
   const nutX = left;
   const stringY = (stringIndex) => top + stringIndex * stringGap;
+  const fretX = (fret) => (fret === 0 ? nutX - 28 : nutX + (fret - 0.5) * fretW);
   const parts = [];
   parts.push(`<rect class="neck-wood" x="0" y="${top - 12}" width="${width}" height="${(strings - 1) * stringGap + 24}" rx="8"></rect>`);
+  if (highlight && Number.isFinite(highlight.fretMin) && Number.isFinite(highlight.fretMax)) {
+    const x1 = highlight.fretMin <= 0 ? Math.max(8, nutX - 42) : nutX + (highlight.fretMin - 1) * fretW;
+    const x2 = nutX + highlight.fretMax * fretW;
+    parts.push(
+      `<rect class="neck-window" x="${x1}" y="${top - 12}" width="${Math.max(8, x2 - x1)}" height="${(strings - 1) * stringGap + 24}" fill="rgba(224,161,6,0.16)" pointer-events="none"></rect>`,
+    );
+  }
   parts.push(`<rect class="neck-nut" x="${nutX - 5}" y="${top - 12}" width="8" height="${(strings - 1) * stringGap + 24}"></rect>`);
   for (let fret = 1; fret <= frets; fret += 1) {
     const x = nutX + fret * fretW;
@@ -165,12 +189,23 @@ export function neckSvg({ markers = [], fretCount = 16 } = {}) {
   for (const marker of markers) {
     const s = marker.stringIndex;
     const y = stringY(s);
-    const x = marker.fret === 0 ? nutX - 28 : nutX + (marker.fret - 0.5) * fretW;
+    const x = fretX(marker.fret);
     const cls = `dot dot-${marker.kind || "scale"}`;
-    parts.push(`<circle class="${cls}" cx="${x}" cy="${y}" r="${marker.kind === "ghost" ? 5 : 9}"></circle>`);
+    const heat = typeof marker.heat === "number" ? ` style="fill:${heatFill(marker.heat)}"` : "";
+    parts.push(`<circle class="${cls}" cx="${x}" cy="${y}" r="${marker.kind === "ghost" ? 5 : 9}"${heat}></circle>`);
     if (marker.kind !== "ghost" && marker.label) {
       parts.push(`<text class="dot-label" x="${x}" y="${y + 3}" text-anchor="middle">${escapeXml(marker.label)}</text>`);
     }
   }
-  return `<svg class="neck" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="指板，依音程標色">${parts.join("")}</svg>`;
+  for (const target of targets) {
+    const s = target.stringIndex;
+    const y = stringY(s);
+    const x = fretX(target.fret);
+    const state = target.state ? ` is-${target.state}` : "";
+    const label = target.label ? `<text class="dot-label" x="${x}" y="${y + 3}" text-anchor="middle" pointer-events="none">${escapeXml(target.label)}</text>` : "";
+    parts.push(
+      `<g class="neck-target" role="button" tabindex="0" focusable="true" data-string="${6 - s}" data-string-index="${s}" data-fret="${target.fret}" aria-label="${escapeXml(target.aria || `${6 - s}弦${target.fret}格`)}"><circle class="neck-hit${state}" cx="${x}" cy="${y}" r="${hitR}" fill="transparent" stroke="rgba(247,241,230,0.4)" stroke-width="1.5"></circle>${label}</g>`,
+    );
+  }
+  return `<svg class="neck" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="${escapeXml(role)}" aria-label="${escapeXml(ariaLabel)}">${parts.join("")}</svg>`;
 }
