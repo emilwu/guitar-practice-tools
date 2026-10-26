@@ -1,0 +1,32 @@
+# tonal
+
+- npm：`@tonaljs/tonal@4.10.0`
+- 來源：https://github.com/tonaljs/tonal
+- 授權：MIT（全文見同目錄 LICENSE）
+- 本目錄檔案：tonal.js（由 esbuild 打包 Chord、Note、Scale、Interval）、LICENSE
+
+- @tonaljs/abc-notation@4.9.3（MIT）
+- @tonaljs/array@4.8.6（MIT）
+- @tonaljs/chord@4.10.2（MIT）
+- @tonaljs/chord-detect@4.9.3（MIT）
+- @tonaljs/chord-type@4.8.2（MIT）
+- @tonaljs/collection@4.9.1（MIT）
+- @tonaljs/core@4.10.4（MIT）
+- @tonaljs/duration-value@4.9.1（MIT）
+- @tonaljs/interval@4.8.2（MIT）
+- @tonaljs/key@4.11.4（MIT）
+- @tonaljs/midi@4.10.4（MIT）
+- @tonaljs/mode@4.9.4（MIT）
+- @tonaljs/note@4.12.3（MIT）
+- @tonaljs/pcset@4.10.3（MIT）
+- @tonaljs/pitch@5.0.1（MIT）
+- @tonaljs/pitch-distance@5.0.7（MIT）
+- @tonaljs/pitch-interval@5.0.2（MIT）
+- @tonaljs/pitch-note@6.1.2（MIT）
+- @tonaljs/progression@4.9.4（MIT）
+- @tonaljs/range@4.9.4（MIT）
+- @tonaljs/roman-numeral@4.9.3（MIT）
+- @tonaljs/scale@4.13.6（MIT）
+- @tonaljs/scale-type@4.9.4（MIT）
+- @tonaljs/time-signature@4.10.1（MIT）
+- @tonaljs/tonal@4.10.0（MIT）

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1612">
+  <title>和弦探索器｜吉他練習工具</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../shared/styles/base.css">
+  <link rel="stylesheet" href="./chord.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">
+      <span class="seal" aria-hidden="true">練</span>
+      <span><small>T1</small><strong>和弦探索器</strong></span>
+    </a>
+    <a href="../">回練習台</a>
+  </header>
+  <main class="wrap chord-main" id="app">
+    <section class="panel">
+      <form id="chord-form" class="chord-form" autocomplete="off">
+        <label for="chord-input">和弦符號</label>
+        <input id="chord-input" type="text" inputmode="text" enterkeyhint="done" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="例如 Am7、Dm7b5、E7#9">
+        <p id="chord-error" class="error" hidden></p>
+      </form>
+      <div id="tone-slot"></div>
+      <p class="hint">也可以只打性質，例如 sus4、dim7、m7b5，會先當成 C。狀態會寫進網址，例如 #chord=Am7&amp;next=D7。</p>
+    </section>
+    <div class="split-wrap split">
+      <section class="panel" id="sec-quality"></section>
+      <section class="panel" id="sec-tones"></section>
+    </div>
+    <section class="panel" id="sec-voicings"></section>
+    <section class="panel" id="sec-neck"></section>
+    <section class="panel" id="sec-triads"></section>
+    <section class="panel" id="sec-scales"></section>
+    <section class="panel" id="sec-next">
+      <h2>接到下一個和弦</h2>
+      <div id="sec-presets"></div>
+      <form id="next-form" class="chord-form" autocomplete="off" style="margin-top:12px">
+        <label for="next-input">下一個和弦</label>
+        <input id="next-input" type="text" inputmode="text" enterkeyhint="done" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="例如 D7">
+      </form>
+      <div id="sec-transition"></div>
+      <p class="muted">V7→I、ii–V–I、IV→iv。點進行裡的按法會把它載入上面，並聽一次。</p>
+    </section>
+  </main>
+  <footer class="site-footer">點按法就會撥弦。預設用錄音，也可以改成合成。shell voicing 只按 R、3、7。跨度超過 4 格的按法不會出現。</footer>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
