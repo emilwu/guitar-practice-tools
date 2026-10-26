@@ -79,7 +79,7 @@ node scripts/vendor.mjs
 - shell voicing 只按 R、3、7，九和弦的 9 音與 m7b5 的 b5 要看指板，不一定在 shell 裡。
 - Drop 2 只做上四弦。
 - 減七的 bb7 在音名上會顯示成較好讀的等音（例如 Bbb 顯示成 A），音程仍標 bb7。
-- 撥弦預設用 `shared/samples/greco/` 的錄音。同一弦挑最近的取樣，用播放速度移調；超過 12 格就從 12 格往上移。取樣載不到時才用 Karplus–Strong。
+- 撥弦預設用 Greco 的錄音，也可以選 Yamaha。同一弦挑最近的取樣，用播放速度移調；超過 12 格就從 12 格往上移。取樣載不到時才用 Karplus–Strong。
 - 吉他音色存在 `localStorage` 的 `guitar-tools.tone.v1`，之後的工具共用。
 - 離線要等第一次載入把 service worker 裝好，再開一次。
 - 這個變更沒有替你打開 GitHub Pages。
