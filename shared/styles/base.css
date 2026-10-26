@@ -83,6 +83,14 @@ button { cursor: pointer; touch-action: manipulation; }
   min-height: 44px; padding: 0 14px; border-radius: 999px; display: inline-flex; align-items: center;
   font-size: 14px; white-space: nowrap;
 }
+.tone-select { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 14px; }
+.tone-label { color: var(--ink-soft); font-size: 15px; }
+.tone-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.tone-option {
+  min-height: 44px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--paper-2); color: var(--ink);
+}
+.tone-option.is-on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .pill { background: var(--accent); color: var(--accent-ink); }
 .ghost-pill { border: 1px dashed var(--muted); color: var(--ink-soft); }
 

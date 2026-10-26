@@ -8,6 +8,16 @@ import { fretSpan, voicingsFor } from "../chord/voicings.js";
 import { chordDiagramSvg, neckSvg } from "../shared/diagram.js";
 import { parseChord } from "../shared/theory.js";
 import { TOOLS } from "../shared/registry.js";
+import {
+  GUITARS,
+  SYNTH_ID,
+  TONE_STORAGE_KEY,
+  leadingSilenceOffset,
+  nearestSample,
+  playbackRate,
+  readTone,
+  writeTone,
+} from "../shared/samples/index.js";
 
 const CASES = [
   ["C", "C", ["R", "3", "5"], [0, 4, 7]],
@@ -151,6 +161,7 @@ test("user-facing pages stay in Traditional Chinese", () => {
     "chord/explain.js",
     "shared/registry.js",
     "shared/home.js",
+    "shared/tone.js",
     "README.md",
     "AGENTS.md",
   ];
@@ -186,4 +197,51 @@ test("every tool is registered once and the landing page reads that list", () =>
   assert.equal(index.includes("節拍器"), false);
   assert.match(readFileSync(new URL("../AGENTS.md", import.meta.url), "utf8"), /shared\//);
   assert.match(readFileSync(new URL("../AGENTS.md", import.meta.url), "utf8"), /vendor\//);
+});
+
+test("nearest recorded fret stays on the same string", () => {
+  const manifest = JSON.parse(readFileSync(new URL("../shared/samples/greco/manifest.json", import.meta.url), "utf8"));
+  const samples = manifest.samples;
+  assert.equal(GUITARS[0].id, "greco");
+  assert.equal(samples.length, 24);
+
+  const open = nearestSample(samples, 6, 0);
+  assert.equal(open.sample.file, "s6f0.mp3");
+  assert.equal(open.semitones, 0);
+
+  const oneUp = nearestSample(samples, 5, 5);
+  assert.equal(oneUp.sample.file, "s5f4.mp3");
+  assert.equal(oneUp.semitones, 1);
+
+  const tie = nearestSample(samples, 1, 2);
+  assert.equal(tie.sample.file, "s1f0.mp3");
+  assert.equal(tie.semitones, 2);
+  assert.equal(nearestSample(samples, 2, 10).sample.file, "s2f8.mp3");
+  assert.ok(Math.abs(playbackRate(tie.semitones) - 2 ** (2 / 12)) < 1e-9);
+
+  const above = nearestSample(samples, 1, 15);
+  assert.equal(above.sample.file, "s1f12.mp3");
+  assert.equal(above.semitones, 3);
+
+  const eleventh = nearestSample(samples, 3, 11);
+  assert.equal(eleventh.sample.file, "s3f12.mp3");
+  assert.equal(eleventh.semitones, -1);
+
+  assert.equal(nearestSample(samples, 9, 0), null);
+  assert.equal(nearestSample(samples, 4, -1), null);
+
+  const memory = new Map();
+  const storage = {
+    getItem: (key) => memory.get(key) ?? null,
+    setItem: (key, value) => memory.set(key, value),
+  };
+  assert.equal(readTone(storage), "greco");
+  assert.equal(writeTone(storage, SYNTH_ID), SYNTH_ID);
+  assert.equal(storage.getItem(TONE_STORAGE_KEY), SYNTH_ID);
+  assert.equal(readTone(storage), SYNTH_ID);
+
+  const channel = new Float32Array(48000);
+  channel[1200] = 0.4;
+  const offset = leadingSilenceOffset(channel, 48000);
+  assert.ok(offset > 0.02 && offset < 0.025);
 });

@@ -1,4 +1,5 @@
 import { playNotes } from "../shared/audio.js";
+import { mountToneSelect } from "../shared/tone.js";
 import { chordDiagramSvg, neckSvg } from "../shared/diagram.js";
 import "../shared/pwa.js";
 import { parseChord } from "../shared/theory.js";
@@ -12,6 +13,7 @@ const state = loadState(location.hash, localStorage);
 const chordInput = document.querySelector("#chord-input");
 const errorEl = document.querySelector("#chord-error");
 chordInput.value = state.chord;
+mountToneSelect(document.querySelector("#tone-slot"));
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));

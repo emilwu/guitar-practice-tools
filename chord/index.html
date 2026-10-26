@@ -24,6 +24,7 @@
         <input id="chord-input" type="text" inputmode="text" enterkeyhint="done" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="例如 Am7、Dm7b5、E7#9">
         <p id="chord-error" class="error" hidden></p>
       </form>
+      <div id="tone-slot"></div>
       <p class="hint">也可以只打性質，例如 sus4、dim7、m7b5，會先當成 C。狀態會寫進網址，例如 #chord=Am7&amp;next=D7。</p>
     </section>
     <div class="split-wrap split">
@@ -45,7 +46,7 @@
       <p class="muted">V7→I、ii–V–I、IV→iv。點進行裡的按法會把它載入上面，並聽一次。</p>
     </section>
   </main>
-  <footer class="site-footer">點按法就會撥弦（Web Audio，沒有取樣）。shell voicing 只按 R、3、7。跨度超過 4 格的按法不會出現。</footer>
+  <footer class="site-footer">點按法就會撥弦。預設用錄音，也可以改成合成。shell voicing 只按 R、3、7。跨度超過 4 格的按法不會出現。</footer>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

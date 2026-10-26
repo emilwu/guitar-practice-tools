@@ -1,4 +1,6 @@
-const CACHE = "guitar-tools-v2";
+const CACHE = "guitar-tools-v3";
+const SAMPLE_GUITARS = ["greco"];
+const SAMPLE_FRETS = [0, 4, 8, 12];
 const ASSETS = [
   "./",
   "./index.html",
@@ -12,6 +14,8 @@ const ASSETS = [
   "./shared/theory.js",
   "./shared/diagram.js",
   "./shared/audio.js",
+  "./shared/tone.js",
+  "./shared/samples/index.js",
   "./chord/",
   "./chord/index.html",
   "./chord/chord.css",
@@ -30,6 +34,13 @@ const ASSETS = [
   "./vendor/tonal/tonal.js",
   "./vendor/chords-db/guitar.js",
 ];
+
+for (const id of SAMPLE_GUITARS) {
+  ASSETS.push(`./shared/samples/${id}/manifest.json`);
+  for (let string = 1; string <= 6; string += 1) {
+    for (const fret of SAMPLE_FRETS) ASSETS.push(`./shared/samples/${id}/s${string}f${fret}.mp3`);
+  }
+}
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)));
