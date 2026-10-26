@@ -14,7 +14,7 @@
 和弦探索器可以：
 
 - 輸入和弦符號（`C`、`Am7`、`G7`、`Dm7b5`、`Cmaj9`、`E7#9`、`sus4`、`dim7`）。只打性質時，先當成 C。
-- 看最多 6 個按法，跨度不超過 4 格：常用開放／封閉、E 型與 A 型封閉、shell voicing（R-3-7、R-7-3）、上四弦 Drop 2。點一下撥弦，預設用 Greco 的錄音，也可以改成合成。
+- 看最多 6 個按法，跨度不超過 4 格：常用開放／封閉、E 型與 A 型封閉、shell voicing（R-3-7、R-7-3）、上四弦 Drop 2。點一下撥弦，預設用 Greco 的錄音，也可以改成 Yamaha 或合成。
 - 看組成音、音程與公式，整支指板依音程標色。
 - 看 1-2-3 弦與 2-3-4 弦的三和弦根音位置和兩個轉位，並標出離目前按法最近的一個。
 - 選音階：maj 用 major pentatonic、Ionian、Lydian；m 用 minor pentatonic、Dorian、Aeolian；7 用 Mixolydian、Blues；m7b5 用 Locrian。落點音是和弦音，避免音是卡在和弦音上方半音的音階音（Lydian 的 #4、Blues 的藍調音除外）。

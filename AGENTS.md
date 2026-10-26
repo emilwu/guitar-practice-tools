@@ -21,7 +21,7 @@
 
 ## 吉他音色
 
-真實錄音放在 `shared/samples/<guitar>/`。不要改已經收進來的 mp3。每個吉他一個資料夾，檔名是 `s{弦}f{格}.mp3`（弦 1–6，1 是高音 E），旁邊有 `manifest.json`。目前只有 `greco`，顯示名稱 Greco，錄了空弦和 4、8、12 格。
+真實錄音放在 `shared/samples/<guitar>/`。不要改已經收進來的 mp3。每個吉他一個資料夾，檔名是 `s{弦}f{格}.mp3`（弦 1–6，1 是高音 E），旁邊有 `manifest.json`。目前有 `greco`（顯示名稱 Greco）和 `yamaha`（顯示名稱 Yamaha），都錄了空弦和 4、8、12 格。
 
 再加一把吉他時：
 

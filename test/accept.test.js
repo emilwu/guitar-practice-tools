@@ -200,10 +200,30 @@ test("every tool is registered once and the landing page reads that list", () =>
 });
 
 test("nearest recorded fret stays on the same string", () => {
+  assert.deepEqual(
+    GUITARS.map((guitar) => ({ id: guitar.id, name: guitar.name })),
+    [
+      { id: "greco", name: "Greco" },
+      { id: "yamaha", name: "Yamaha" },
+    ],
+  );
+  for (const guitar of GUITARS) {
+    const data = JSON.parse(readFileSync(new URL(`../shared/samples/${guitar.folder}/manifest.json`, import.meta.url), "utf8"));
+    assert.equal(data.samples.length, 24, guitar.id);
+    assert.equal(data.loudness.target_lufs, -20, guitar.id);
+  }
+  const worker = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
+  assert.match(worker, /SAMPLE_GUITARS = \["greco", "yamaha"\]/);
+  assert.match(worker, /guitar-tools-v4/);
+  const pwa = readFileSync(new URL("../shared/pwa.js", import.meta.url), "utf8");
+  assert.match(pwa, /new URL\("\.\.\/sw\.js", import\.meta\.url\)/);
+  assert.match(pwa, /scope/);
+  for (const file of ["index.html", "chord/index.html", "shared/home.js", "shared/registry.js", "shared/pwa.js"]) {
+    const text = readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
+    assert.equal(/(?:href|src)=["']\//.test(text), false, file);
+  }
   const manifest = JSON.parse(readFileSync(new URL("../shared/samples/greco/manifest.json", import.meta.url), "utf8"));
   const samples = manifest.samples;
-  assert.equal(GUITARS[0].id, "greco");
-  assert.equal(samples.length, 24);
 
   const open = nearestSample(samples, 6, 0);
   assert.equal(open.sample.file, "s6f0.mp3");

@@ -1,6 +1,7 @@
 /** Guitars available to every tool. Add a folder under shared/samples/ and one entry here. */
 export const GUITARS = [
   { id: "greco", folder: "greco", name: "Greco" },
+  { id: "yamaha", folder: "yamaha", name: "Yamaha" },
 ];
 
 export const SYNTH_ID = "synth";
