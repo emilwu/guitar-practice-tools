@@ -226,7 +226,7 @@ test("nearest recorded fret stays on the same string", () => {
   }
   const worker = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
   assert.match(worker, /SAMPLE_GUITARS = \["greco", "yamaha"\]/);
-  assert.match(worker, /guitar-tools-v9/);
+  assert.match(worker, /guitar-tools-v10/);
   const pwa = readFileSync(new URL("../shared/pwa.js", import.meta.url), "utf8");
   assert.match(pwa, /new URL\("\.\.\/sw\.js", import\.meta\.url\)/);
   assert.match(pwa, /scope/);
