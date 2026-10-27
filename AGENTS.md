@@ -89,7 +89,7 @@ log/#stage=2&week=3&exercise=八分音符&tool=metronome&bpm=60
 
 ## 吉他音色
 
-真實錄音放在 `shared/samples/<guitar>/`。不要改已經收進來的 mp3。每個吉他一個資料夾，檔名是 `s{弦}f{格}.mp3`（弦 1–6，1 是高音 E），旁邊有 `manifest.json`。目前有 `greco`（顯示名稱 Greco）和 `yamaha`（顯示名稱 Yamaha），都錄了空弦和 4、8、12 格。
+真實錄音放在 `shared/samples/<guitar>/`。這些 mp3 是從 Emil 的錄音原檔切分、轉檔產生的，不要個別手動修改。重錄時從新的原檔整批重新產生、整組替換，同時更新 `manifest.json` 並升級 `sw.js` 的快取版本。每個吉他一個資料夾，檔名是 `s{弦}f{格}.mp3`（弦 1–6，1 是高音 E），旁邊有 `manifest.json`。目前有 `greco`（顯示名稱 Greco）和 `yamaha`（顯示名稱 Yamaha），都錄了空弦和 4、8、12 格。
 
 再加一把吉他時：
 
