@@ -1,4 +1,4 @@
-const CACHE = "guitar-tools-v9";
+const CACHE = "guitar-tools-v10";
 const SAMPLE_GUITARS = ["greco", "yamaha"];
 const SAMPLE_FRETS = [0, 4, 8, 12];
 const ASSETS = [

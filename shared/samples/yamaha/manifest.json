@@ -20,13 +20,13 @@
       "fret": 0,
       "note": "E2",
       "midi": 40,
-      "recordedCents": 3.0,
-      "cents": 0.1,
+      "recordedCents": -7.8,
+      "cents": 0.7,
       "source": "Yamaha-String6.wav",
-      "source_onset_s": 2.284,
+      "source_onset_s": 2.092,
       "take": 1,
-      "recordedHz": 82.55,
-      "hz": 82.41
+      "recordedHz": 82.04,
+      "hz": 82.44
     },
     {
       "file": "s6f4.mp3",
@@ -34,13 +34,13 @@
       "fret": 4,
       "note": "G#2",
       "midi": 44,
-      "recordedCents": 11.2,
-      "cents": -0.5,
+      "recordedCents": 15.2,
+      "cents": -0.3,
       "source": "Yamaha-String6.wav",
-      "source_onset_s": 26.264,
+      "source_onset_s": 26.119,
       "take": 2,
-      "recordedHz": 104.5,
-      "hz": 103.8
+      "recordedHz": 104.74,
+      "hz": 103.81
     },
     {
       "file": "s6f8.mp3",
@@ -48,13 +48,13 @@
       "fret": 8,
       "note": "C3",
       "midi": 48,
-      "recordedCents": 3.7,
-      "cents": 0.0,
+      "recordedCents": -1.8,
+      "cents": 0.7,
       "source": "Yamaha-String6.wav",
-      "source_onset_s": 42.051,
+      "source_onset_s": 41.725,
       "take": 2,
-      "recordedHz": 131.1,
-      "hz": 130.82
+      "recordedHz": 130.68,
+      "hz": 130.86
     },
     {
       "file": "s6f12.mp3",
@@ -62,13 +62,13 @@
       "fret": 12,
       "note": "E3",
       "midi": 52,
-      "recordedCents": 0.1,
-      "cents": -0.1,
+      "recordedCents": -3.8,
+      "cents": 0.7,
       "source": "Yamaha-String6.wav",
-      "source_onset_s": 58.158,
+      "source_onset_s": 58.225,
       "take": 2,
-      "recordedHz": 164.82,
-      "hz": 164.8
+      "recordedHz": 164.45,
+      "hz": 164.88
     },
     {
       "file": "s5f0.mp3",
@@ -76,13 +76,13 @@
       "fret": 0,
       "note": "A2",
       "midi": 45,
-      "recordedCents": 6.9,
-      "cents": 0.0,
+      "recordedCents": 4.2,
+      "cents": -0.3,
       "source": "Yamaha-String5.wav",
-      "source_onset_s": 10.161,
-      "take": 2,
-      "recordedHz": 110.44,
-      "hz": 110.0
+      "source_onset_s": 2.321,
+      "take": 1,
+      "recordedHz": 110.27,
+      "hz": 109.98
     },
     {
       "file": "s5f4.mp3",
@@ -90,13 +90,13 @@
       "fret": 4,
       "note": "C#3",
       "midi": 49,
-      "recordedCents": 8.5,
-      "cents": 0.1,
+      "recordedCents": 8.2,
+      "cents": -0.3,
       "source": "Yamaha-String5.wav",
-      "source_onset_s": 25.928,
+      "source_onset_s": 26.067,
       "take": 2,
-      "recordedHz": 139.27,
-      "hz": 138.6
+      "recordedHz": 139.25,
+      "hz": 138.57
     },
     {
       "file": "s5f8.mp3",
@@ -104,13 +104,13 @@
       "fret": 8,
       "note": "F3",
       "midi": 53,
-      "recordedCents": 3.7,
-      "cents": -0.1,
+      "recordedCents": 8.2,
+      "cents": 1.7,
       "source": "Yamaha-String5.wav",
-      "source_onset_s": 41.202,
+      "source_onset_s": 42.048,
       "take": 2,
-      "recordedHz": 174.99,
-      "hz": 174.6
+      "recordedHz": 175.44,
+      "hz": 174.78
     },
     {
       "file": "s5f12.mp3",
@@ -118,13 +118,13 @@
       "fret": 12,
       "note": "A3",
       "midi": 57,
-      "recordedCents": 8.2,
-      "cents": 0.0,
+      "recordedCents": 9.2,
+      "cents": 1.7,
       "source": "Yamaha-String5.wav",
-      "source_onset_s": 58.305,
+      "source_onset_s": 58.313,
       "take": 2,
-      "recordedHz": 221.04,
-      "hz": 220.0
+      "recordedHz": 221.17,
+      "hz": 220.21
     },
     {
       "file": "s4f0.mp3",
@@ -132,13 +132,13 @@
       "fret": 0,
       "note": "D3",
       "midi": 50,
-      "recordedCents": -0.6,
-      "cents": 0.1,
+      "recordedCents": -2.8,
+      "cents": -0.3,
       "source": "Yamaha-String4.wav",
-      "source_onset_s": 10.244,
-      "take": 2,
-      "recordedHz": 146.78,
-      "hz": 146.84
+      "source_onset_s": 2.343,
+      "take": 1,
+      "recordedHz": 146.6,
+      "hz": 146.81
     },
     {
       "file": "s4f4.mp3",
@@ -146,13 +146,13 @@
       "fret": 4,
       "note": "F#3",
       "midi": 54,
-      "recordedCents": -0.7,
-      "cents": 0.0,
+      "recordedCents": 3.2,
+      "cents": 0.7,
       "source": "Yamaha-String4.wav",
-      "source_onset_s": 25.806,
+      "source_onset_s": 25.058,
       "take": 2,
-      "recordedHz": 184.92,
-      "hz": 184.99
+      "recordedHz": 185.34,
+      "hz": 185.07
     },
     {
       "file": "s4f8.mp3",
@@ -160,13 +160,13 @@
       "fret": 8,
       "note": "A#3",
       "midi": 58,
-      "recordedCents": -3.8,
-      "cents": 0.0,
+      "recordedCents": 0.2,
+      "cents": 0.7,
       "source": "Yamaha-String4.wav",
-      "source_onset_s": 41.835,
-      "take": 2,
-      "recordedHz": 232.56,
-      "hz": 233.08
+      "source_onset_s": 34.301,
+      "take": 1,
+      "recordedHz": 233.11,
+      "hz": 233.17
     },
     {
       "file": "s4f12.mp3",
@@ -174,13 +174,13 @@
       "fret": 12,
       "note": "D4",
       "midi": 62,
-      "recordedCents": 2.3,
-      "cents": -0.1,
+      "recordedCents": -0.8,
+      "cents": 0.7,
       "source": "Yamaha-String4.wav",
-      "source_onset_s": 50.727,
-      "take": 1,
-      "recordedHz": 294.05,
-      "hz": 293.65
+      "source_onset_s": 58.845,
+      "take": 2,
+      "recordedHz": 293.53,
+      "hz": 293.78
     },
     {
       "file": "s3f0.mp3",
@@ -188,13 +188,13 @@
       "fret": 0,
       "note": "G3",
       "midi": 55,
-      "recordedCents": -2.4,
-      "cents": 0.0,
+      "recordedCents": -0.8,
+      "cents": 0.7,
       "source": "Yamaha-String3.wav",
-      "source_onset_s": 10.107,
+      "source_onset_s": 10.248,
       "take": 2,
-      "recordedHz": 195.73,
-      "hz": 196.0
+      "recordedHz": 195.91,
+      "hz": 196.08
     },
     {
       "file": "s3f4.mp3",
@@ -202,13 +202,13 @@
       "fret": 4,
       "note": "B3",
       "midi": 59,
-      "recordedCents": -0.2,
-      "cents": -0.1,
+      "recordedCents": 5.2,
+      "cents": 0.7,
       "source": "Yamaha-String3.wav",
-      "source_onset_s": 25.641,
-      "take": 2,
-      "recordedHz": 246.91,
-      "hz": 246.92
+      "source_onset_s": 18.474,
+      "take": 1,
+      "recordedHz": 247.69,
+      "hz": 247.04
     },
     {
       "file": "s3f8.mp3",
@@ -216,13 +216,13 @@
       "fret": 8,
       "note": "D#4",
       "midi": 63,
-      "recordedCents": -2.9,
-      "cents": 0.0,
+      "recordedCents": -3.8,
+      "cents": 0.7,
       "source": "Yamaha-String3.wav",
-      "source_onset_s": 42.188,
-      "take": 2,
-      "recordedHz": 310.61,
-      "hz": 311.13
+      "source_onset_s": 34.067,
+      "take": 1,
+      "recordedHz": 310.45,
+      "hz": 311.25
     },
     {
       "file": "s3f12.mp3",
@@ -230,13 +230,13 @@
       "fret": 12,
       "note": "G4",
       "midi": 67,
-      "recordedCents": -3.7,
-      "cents": 0.0,
+      "recordedCents": -5.8,
+      "cents": 0.7,
       "source": "Yamaha-String3.wav",
-      "source_onset_s": 50.262,
-      "take": 1,
-      "recordedHz": 391.16,
-      "hz": 392.01
+      "source_onset_s": 58.137,
+      "take": 2,
+      "recordedHz": 390.69,
+      "hz": 392.15
     },
     {
       "file": "s2f0.mp3",
@@ -244,13 +244,13 @@
       "fret": 0,
       "note": "B3",
       "midi": 59,
-      "recordedCents": -5.9,
-      "cents": 0.1,
+      "recordedCents": -6.8,
+      "cents": 0.7,
       "source": "Yamaha-String2.wav",
-      "source_onset_s": 2.354,
+      "source_onset_s": 2.463,
       "take": 1,
-      "recordedHz": 246.11,
-      "hz": 246.96
+      "recordedHz": 245.97,
+      "hz": 247.04
     },
     {
       "file": "s2f4.mp3",
@@ -258,13 +258,13 @@
       "fret": 4,
       "note": "D#4",
       "midi": 63,
-      "recordedCents": -2.4,
-      "cents": 0.1,
+      "recordedCents": -0.8,
+      "cents": 0.7,
       "source": "Yamaha-String2.wav",
-      "source_onset_s": 26.101,
+      "source_onset_s": 25.995,
       "take": 2,
-      "recordedHz": 310.7,
-      "hz": 311.15
+      "recordedHz": 310.98,
+      "hz": 311.25
     },
     {
       "file": "s2f8.mp3",
@@ -272,13 +272,13 @@
       "fret": 8,
       "note": "G4",
       "midi": 67,
-      "recordedCents": -6.0,
-      "cents": -0.1,
+      "recordedCents": -6.8,
+      "cents": 0.7,
       "source": "Yamaha-String2.wav",
-      "source_onset_s": 42.141,
-      "take": 2,
-      "recordedHz": 390.64,
-      "hz": 391.98
+      "source_onset_s": 34.163,
+      "take": 1,
+      "recordedHz": 390.46,
+      "hz": 392.15
     },
     {
       "file": "s2f12.mp3",
@@ -286,13 +286,13 @@
       "fret": 12,
       "note": "B4",
       "midi": 71,
-      "recordedCents": -6.3,
-      "cents": 0.1,
+      "recordedCents": -6.8,
+      "cents": 0.7,
       "source": "Yamaha-String2.wav",
-      "source_onset_s": 58.22,
-      "take": 2,
-      "recordedHz": 492.08,
-      "hz": 493.93
+      "source_onset_s": 50.331,
+      "take": 1,
+      "recordedHz": 491.95,
+      "hz": 494.08
     },
     {
       "file": "s1f0.mp3",
@@ -300,13 +300,13 @@
       "fret": 0,
       "note": "E4",
       "midi": 64,
-      "recordedCents": 4.9,
-      "cents": 0.0,
+      "recordedCents": 4.2,
+      "cents": -0.3,
       "source": "Yamaha-String1.wav",
-      "source_onset_s": 10.096,
+      "source_onset_s": 10.27,
       "take": 2,
-      "recordedHz": 330.57,
-      "hz": 329.63
+      "recordedHz": 330.43,
+      "hz": 329.57
     },
     {
       "file": "s1f4.mp3",
@@ -314,13 +314,13 @@
       "fret": 4,
       "note": "G#4",
       "midi": 68,
-      "recordedCents": 6.8,
-      "cents": 0.0,
+      "recordedCents": 4.2,
+      "cents": -0.3,
       "source": "Yamaha-String1.wav",
-      "source_onset_s": 26.094,
+      "source_onset_s": 25.841,
       "take": 2,
-      "recordedHz": 416.94,
-      "hz": 415.31
+      "recordedHz": 416.32,
+      "hz": 415.23
     },
     {
       "file": "s1f8.mp3",
@@ -328,13 +328,13 @@
       "fret": 8,
       "note": "C5",
       "midi": 72,
-      "recordedCents": 3.5,
-      "cents": 0.1,
+      "recordedCents": 1.2,
+      "cents": 0.7,
       "source": "Yamaha-String1.wav",
-      "source_onset_s": 42.079,
-      "take": 2,
-      "recordedHz": 524.31,
-      "hz": 523.28
+      "source_onset_s": 34.026,
+      "take": 1,
+      "recordedHz": 523.62,
+      "hz": 523.46
     },
     {
       "file": "s1f12.mp3",
@@ -342,13 +342,13 @@
       "fret": 12,
       "note": "E5",
       "midi": 76,
-      "recordedCents": 2.6,
-      "cents": 0.0,
+      "recordedCents": 3.2,
+      "cents": 0.7,
       "source": "Yamaha-String1.wav",
-      "source_onset_s": 50.439,
-      "take": 1,
-      "recordedHz": 660.25,
-      "hz": 659.27
+      "source_onset_s": 58.36,
+      "take": 2,
+      "recordedHz": 660.48,
+      "hz": 659.52
     }
   ],
   "notes": "recordedCents = pitch of the raw take vs 12-TET (A4=440 Hz); cents = pitch of this file after resampling-based correction; positive = sharp",
