@@ -11,7 +11,6 @@ import { parseChord } from "../shared/theory.js";
 import { TOOLS } from "../shared/registry.js";
 import {
   GUITARS,
-  SYNTH_ID,
   TONE_STORAGE_KEY,
   leadingSilenceOffset,
   nearestSample,
@@ -227,7 +226,7 @@ test("nearest recorded fret stays on the same string", () => {
   }
   const worker = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
   assert.match(worker, /SAMPLE_GUITARS = \["greco", "yamaha"\]/);
-  assert.match(worker, /guitar-tools-v8/);
+  assert.match(worker, /guitar-tools-v9/);
   const pwa = readFileSync(new URL("../shared/pwa.js", import.meta.url), "utf8");
   assert.match(pwa, /new URL\("\.\.\/sw\.js", import\.meta\.url\)/);
   assert.match(pwa, /scope/);
@@ -269,9 +268,13 @@ test("nearest recorded fret stays on the same string", () => {
     setItem: (key, value) => memory.set(key, value),
   };
   assert.equal(readTone(storage), "greco");
-  assert.equal(writeTone(storage, SYNTH_ID), SYNTH_ID);
-  assert.equal(storage.getItem(TONE_STORAGE_KEY), SYNTH_ID);
-  assert.equal(readTone(storage), SYNTH_ID);
+  storage.setItem(TONE_STORAGE_KEY, "synth");
+  assert.equal(readTone(storage), "greco");
+  assert.equal(storage.getItem(TONE_STORAGE_KEY), "greco");
+  assert.equal(writeTone(storage, "synth"), "greco");
+  assert.equal(writeTone(storage, "yamaha"), "yamaha");
+  assert.equal(readFileSync(new URL("../shared/tone.js", import.meta.url), "utf8").includes("合成"), false);
+  assert.equal(readFileSync(new URL("../shared/audio.js", import.meta.url), "utf8").includes("Karplus"), false);
 
   const channel = new Float32Array(48000);
   channel[1200] = 0.4;

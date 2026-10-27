@@ -4,8 +4,8 @@ export const GUITARS = [
   { id: "yamaha", folder: "yamaha", name: "Yamaha" },
 ];
 
-export const SYNTH_ID = "synth";
 export const TONE_STORAGE_KEY = "guitar-tools.tone.v1";
+const LEGACY_SYNTH = "synth";
 
 export function readTone(storage) {
   let id = "";
@@ -14,12 +14,20 @@ export function readTone(storage) {
   } catch {
     id = "";
   }
-  if (id === SYNTH_ID || GUITARS.some((guitar) => guitar.id === id)) return id;
-  return GUITARS[0]?.id || SYNTH_ID;
+  if (GUITARS.some((guitar) => guitar.id === id)) return id;
+  const fallback = GUITARS[0].id;
+  if (id === LEGACY_SYNTH) {
+    try {
+      storage?.setItem?.(TONE_STORAGE_KEY, fallback);
+    } catch {
+      /* private mode */
+    }
+  }
+  return fallback;
 }
 
 export function writeTone(storage, id) {
-  const next = id === SYNTH_ID || GUITARS.some((guitar) => guitar.id === id) ? id : readTone(storage);
+  const next = GUITARS.some((guitar) => guitar.id === id) ? id : GUITARS[0].id;
   try {
     storage?.setItem?.(TONE_STORAGE_KEY, next);
   } catch {

@@ -91,6 +91,8 @@ button { cursor: pointer; touch-action: manipulation; }
   border: 1px solid var(--line); background: var(--paper-2); color: var(--ink);
 }
 .tone-option.is-on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.sample-status { flex-basis: 100%; margin: 0; color: var(--accent); font-size: 15px; }
+.sample-status[hidden] { display: none; }
 .pill { background: var(--accent); color: var(--accent-ink); }
 .ghost-pill { border: 1px dashed var(--muted); color: var(--ink-soft); }
 

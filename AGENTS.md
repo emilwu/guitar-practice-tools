@@ -8,7 +8,7 @@
 - 共用程式只放 `shared/`，每個工具用相對路徑 import，不要複製一份：
   - `shared/diagram.js`：指板與和弦圖 SVG
   - `shared/theory.js`：包在 `vendor/tonal` 上的理論
-  - `shared/audio.js`：撥弦。優先播 `shared/samples/` 的錄音，載入失敗才用 Karplus–Strong 合成
+  - `shared/audio.js`：撥弦，只用 `shared/samples/` 的錄音。載入失敗就顯示錯誤、不出聲
   - `shared/tone.js`：吉他音色選擇，各工具共用
   - `shared/styles/base.css`：全站樣式
   - `shared/pitch.js`：空弦音高，給上面幾個模組用
@@ -97,7 +97,7 @@ log/#stage=2&week=3&exercise=八分音符&tool=metronome&bpm=60
 2. 在 `shared/samples/index.js` 的 `GUITARS` 加一筆 `{ id, folder, name }`。
 3. 在 `sw.js` 的 `SAMPLE_GUITARS` 加上同一個 id，第一次載入才會把取樣存進離線快取。
 
-每個工具都用 `shared/audio.js` 撥弦，並用 `mountToneSelect`（`shared/tone.js`）畫出「吉他音色」。選擇寫在 `localStorage` 的 `guitar-tools.tone.v1`，所有工具讀同一把。選「合成」，或取樣還沒進快取、載入失敗時，回到 Karplus–Strong。
+每個要出吉他聲的工具都用 `shared/audio.js` 撥弦，並用 `mountToneSelect`（`shared/tone.js`）畫出「吉他音色」。選擇寫在 `localStorage` 的 `guitar-tools.tone.v1`，所有工具讀同一把。只有登記過的吉他。舊的 `synth` 會改寫成 Greco。取樣還在載入時排隊，載入失敗顯示「取樣載入失敗，請重新整理」，不要另做合成撥弦。節拍器的點擊不是吉他音色，留在 `metronome/`。
 
 ## 指板訓練的 hash
 
