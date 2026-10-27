@@ -1,4 +1,15 @@
-import { GUITARS, SYNTH_ID, readTone, writeTone } from "./samples/index.js";
+import { GUITARS, readTone, writeTone } from "./samples/index.js";
+
+export const SAMPLE_LOAD_ERROR = "取樣載入失敗，請重新整理";
+
+export function setSampleStatus(message) {
+  if (typeof document === "undefined") return;
+  const text = message || "";
+  document.querySelectorAll("[data-sample-status]").forEach((el) => {
+    el.hidden = !text;
+    el.textContent = text;
+  });
+}
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
@@ -10,7 +21,7 @@ export function mountToneSelect(root, storage = globalThis.localStorage) {
 
   function paint() {
     const current = readTone(storage);
-    const options = [...GUITARS.map((guitar) => ({ id: guitar.id, label: guitar.name })), { id: SYNTH_ID, label: "合成" }];
+    const options = GUITARS.map((guitar) => ({ id: guitar.id, label: guitar.name }));
     root.innerHTML = `<div class="tone-select" role="group" aria-label="吉他音色">
       <span class="tone-label">吉他音色</span>
       <div class="tone-options">${options
@@ -19,6 +30,7 @@ export function mountToneSelect(root, storage = globalThis.localStorage) {
             `<button type="button" class="tone-option${option.id === current ? " is-on" : ""}" data-tone="${esc(option.id)}" aria-pressed="${option.id === current ? "true" : "false"}">${esc(option.label)}</button>`,
         )
         .join("")}</div>
+      <p class="sample-status" data-sample-status role="status" hidden></p>
     </div>`;
   }
 

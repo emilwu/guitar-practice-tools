@@ -14,7 +14,7 @@
 和弦探索器可以：
 
 - 輸入和弦符號（`C`、`Am7`、`G7`、`Dm7b5`、`Cmaj9`、`E7#9`、`sus4`、`dim7`）。只打性質時，先當成 C。
-- 看最多 6 個按法，跨度不超過 4 格：常用開放／封閉、E 型與 A 型封閉、shell voicing（R-3-7、R-7-3）、上四弦 Drop 2。點一下撥弦，預設用 Greco 的錄音，也可以改成 Yamaha 或合成。
+- 看最多 6 個按法，跨度不超過 4 格：常用開放／封閉、E 型與 A 型封閉、shell voicing（R-3-7、R-7-3）、上四弦 Drop 2。點一下撥弦，用 Greco 或 Yamaha 的錄音。
 - 看組成音、音程與公式，整支指板依音程標色。
 - 看 1-2-3 弦與 2-3-4 弦的三和弦根音位置和兩個轉位，並標出離目前按法最近的一個。
 - 選音階：maj 用 major pentatonic、Ionian、Lydian；m 用 minor pentatonic、Dorian、Aeolian；7 用 Mixolydian、Blues；m7b5 用 Locrian。落點音是和弦音，避免音是卡在和弦音上方半音的音階音（Lydian 的 #4、Blues 的藍調音除外）。
@@ -68,7 +68,7 @@ metronome/#bpm=60&meter=4/4&subdivision=eighth&swing=50&accents=mama
 - 音程：給一個根音，找出 3、b3、5、b7 這些級數；或看兩個點，說出音程。b5 與 #4、#5 與 b6 算同一個。
 - 音階／五聲框：選調、音階（大調、自然小調、大調五聲、小調五聲、藍調 Blues）和 CAGED 框，靠記憶把框點滿再對答案。五聲第 1 框是 E 型，根音在第 6 弦。
 - 每條弦可以單獨開關，品格有 0–12、0–15 和自訂。可以只練自然音，也可以計時（例如 60 秒）。
-- 答題時用同一組吉他音色撥弦：Greco、Yamaha 或合成。
+- 答題時用同一組吉他音色撥弦：Greco 或 Yamaha。
 - 桌面可用鍵盤。識音把 z 列當鋼琴（z 是 C，黑鍵是 s d g h j）。Enter 看答案或下一題。
 - 每個音、每一弦的正確率和平均反應時間留在這台裝置，指板上用熱圖標出比較不穩的格子，可以清除統計。
 
@@ -207,7 +207,7 @@ node scripts/vendor.mjs
 - shell voicing 只按 R、3、7，九和弦的 9 音與 m7b5 的 b5 要看指板，不一定在 shell 裡。
 - Drop 2 只做上四弦。
 - 減七的 bb7 在音名上會顯示成較好讀的等音（例如 Bbb 顯示成 A），音程仍標 bb7。
-- 撥弦預設用 Greco 的錄音，也可以選 Yamaha。同一弦挑最近的取樣，用播放速度移調；超過 12 格就從 12 格往上移。取樣載不到時才用 Karplus–Strong。
+- 撥弦只用 Greco 或 Yamaha 的錄音。同一弦挑最近的取樣，用播放速度移調；超過 12 格就從 12 格往上移。取樣還在載入時會排隊再播；載入失敗會顯示「取樣載入失敗，請重新整理」，不會改播合成音。以前存成合成的音色會改成 Greco。
 - 吉他音色存在 `localStorage` 的 `guitar-tools.tone.v1`，之後的工具共用。
 - 離線要等第一次載入把 service worker 裝好，再開一次。
 - 這個變更沒有替你打開 GitHub Pages。

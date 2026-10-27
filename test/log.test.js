@@ -239,7 +239,7 @@ test("log is live, embeddable, and the metronome can open it", () => {
     [],
   );
   const worker = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
-  assert.match(worker, /guitar-tools-v8/);
+  assert.match(worker, /guitar-tools-v9/);
   for (const file of ["./log/app.js", "./log/log.js", "./log/log.css", "./shared/embed.js", "./shared/embed-boot.js"]) {
     assert.ok(worker.includes(file), file);
   }
